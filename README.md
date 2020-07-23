@@ -27,3 +27,7 @@ project in order to practice skills such as character creation and designing a c
 
 
 ## User Stories
+* As a user, I want to be able to create my own character(s) with stats and attributes and add it to a list of characters
+* As a user, I want to be able to select two of my characters from my list of characters and have them engage in combat
+* As a user, I want to be able to edit the stats or attributes a character from the list
+* As a user, I want to be able to select one of my characters from the list and have them challenge the boss
