@@ -16,18 +16,18 @@ import java.util.Scanner;
 // NOTE: I referenced the TellerApp for the implementation of the Scanner code in the ui
 
 // The RPG battle simulator application
-public class GameApp {
+public class BattleSimulator {
     private CharacterList list;
     private Scanner input;
 
     // EFFECTS: runs the application
-    public GameApp() {
+    public BattleSimulator() {
         runGame();
     }
 
     private void runGame() {
         boolean keepGoing = true;
-        String command = null;
+        String command;
         input = new Scanner(System.in);
         list = new CharacterList();
 
@@ -210,7 +210,7 @@ public class GameApp {
     // EFFECTS: allows player to manage existing characters
     private void manageCharacters() {
         boolean keepGoing = true;
-        String command = null;
+        String command;
 
         while (keepGoing) {
             displayMenu2();
@@ -250,7 +250,7 @@ public class GameApp {
     // EFFECTS: allows player to enter battle simulation
     private void battle() {
         boolean keepGoing = true;
-        String command = null;
+        String command;
 
         while (keepGoing) {
             displayMenu3();
