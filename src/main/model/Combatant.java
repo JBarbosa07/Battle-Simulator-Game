@@ -1,7 +1,7 @@
 package model;
 
 // Represents a combatant in the game
-public abstract class Combatant {
+public abstract class Combatant implements Fightable {
     protected String name;
     protected int hp;
     protected int atk;
@@ -19,6 +19,7 @@ public abstract class Combatant {
     // MODIFIES: this
     // EFFECTS: decreases the character's hp by (opponent's ATK - character's def). If the damage dealt exceeds the hp
     // remaining, stop the hp decrease at 0.
+    @Override
     public void attackedBy(Combatant c) {
         int damage = (c.getATK() - def);
         if (damage < 0) {
@@ -32,6 +33,7 @@ public abstract class Combatant {
     }
 
     // EFFECTS: if combatant's hp is 0, returns true, otherwise returns false
+    @Override
     public boolean isDead() {
         return hp == 0;
     }
