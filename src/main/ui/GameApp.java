@@ -13,7 +13,7 @@ import ui.exceptions.StalemateException;
 
 import java.util.Scanner;
 
-// NOTE: I referenced the AccountNotRobust lecture lab for the implementation of the Scanner code for the ui
+// NOTE: I referenced the TellerApp for the implementation of the Scanner code in the ui
 
 // The RPG battle simulator application
 public class GameApp {
@@ -329,7 +329,7 @@ public class GameApp {
         }
     }
 
-    // EFFECTS: if damage was > 0, prints ordinary damage number in message, else prints 0 damage dealt
+    // EFFECTS: if damage is > 0, prints ordinary damage number in message, else prints 0 damage dealt
     private void damageMessage(Combatant p1, Combatant p2, int damage) {
         if (damage > 0) {
             System.out.println(p1.getName() + " attacked " + p2.getName() + " and did " + damage + " damage!");
@@ -337,5 +337,4 @@ public class GameApp {
             System.out.println(p1.getName() + " attacked " + p2.getName() + " and did 0 damage!");
         }
     }
-
 }
