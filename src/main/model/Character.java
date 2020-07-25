@@ -10,7 +10,7 @@ public class Character extends Combatant {
         statPool = 500;
     }
 
-    // REQUIRES: char length is at least >= 1
+    // REQUIRES: char length is at least >= 1; character name doesn't already exist
     // MODIFIES: this
     // EFFECTS: sets the name of the character
     public void setName(String name) {
@@ -25,7 +25,7 @@ public class Character extends Combatant {
         statPool = statPool - hp;
     }
 
-    // REQUIRES: atk >= 1, atk <= stat pool
+    // REQUIRES: atk <= stat pool
     // MODIFIES: this
     // EFFECTS: sets the ATK stat of the character and subtracts the same amount from the stat pool
     public void setATK(int atk) {
@@ -48,7 +48,7 @@ public class Character extends Combatant {
     }
 
     // EFFECTS: lists the stats and attributes of the given character
-    public String viewCharacter() {
+    public String printCharacter() {
         return name + " - " + "HP: " + hp + ", ATK: " + atk + ", DEF: " + def + ", Quote: " + quote;
     }
 

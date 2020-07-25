@@ -70,7 +70,7 @@ class CharacterTest {
         character.setDEF(100);
         character.setQuote("Hyah!");
         assertEquals("Name - HP: 250, ATK: 150, DEF: 100, Quote: Hyah!",
-                character.viewCharacter());
+                character.printCharacter());
     }
 
     @Test

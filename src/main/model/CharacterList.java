@@ -27,9 +27,23 @@ public class CharacterList {
 
     // REQUIRES: character exists in the list
     // EFFECTS: finds the character in the list and returns it
-    public Character getCharacter(Character c) {
-        int id = list.indexOf(c);
-        return list.get(id);
+    public Character getCharacter(String name) {
+        Character selected = null;
+        for (Character c: list) {
+            if (c.getName() == name) {
+                selected = c;
+            }
+        }
+        return selected;
+    }
+
+    // EFFECTS: prints a list of character names in the list
+    public String printCharacters() {
+        String names = "Here are your current characters:";
+        for (Character c : list) {
+            names = names + " " + c.getName() + ",";
+        }
+        return names;
     }
 
     // Getters

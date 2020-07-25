@@ -17,10 +17,7 @@ public class CharacterListTest {
         otherCharacter = new Character();
 
         character.setName("Name");
-        character.setHP(250);
-        character.setATK(150);
-        character.setDEF(100);
-        character.setQuote("Hyah!");
+        otherCharacter.setName("Name2");
     }
 
     @Test
@@ -61,6 +58,28 @@ public class CharacterListTest {
     @Test
     public void testGetCharacter() {
         list.addCharacter(character);
-        assertEquals(character, list.getCharacter(character));
+        assertEquals(character, list.getCharacter("Name"));
+    }
+
+    @Test
+    public void testGetCharacterFromMultiList() {
+        list.addCharacter(character);
+        list.addCharacter(otherCharacter);
+        assertEquals(otherCharacter, list.getCharacter("Name2"));
+    }
+
+    @Test
+    public void testPrintCharacters() {
+        list.addCharacter(character);
+        list.addCharacter(otherCharacter);
+        assertEquals("Here are your current characters: Name, Name2," , list.printCharacters());
+    }
+
+    @Test
+    public void testAddRemoveThenPrintCharacters() {
+        list.addCharacter(character);
+        list.addCharacter(otherCharacter);
+        list.removeCharacter(otherCharacter);
+        assertEquals("Here are your current characters: Name," , list.printCharacters());
     }
 }
