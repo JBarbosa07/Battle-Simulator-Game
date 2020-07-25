@@ -20,9 +20,12 @@ public abstract class Combatant {
     // EFFECTS: decreases the character's hp by (opponent's ATK - character's def). If the damage dealt exceeds the hp
     // remaining, stop the hp decrease at 0.
     public void attackedBy(Combatant c) {
-        int damage = hp - (c.getATK() - def);
-        if (damage >= 0) {
-            hp = damage;
+        int damage = (c.getATK() - def);
+        if (damage < 0) {
+            damage = 0;
+        }
+        if (hp - damage >= 0) {
+            hp = hp - damage;
         } else {
             hp = 0;
         }

@@ -167,6 +167,17 @@ class CharacterTest {
     }
 
     @Test
+    public void testAttackedZero() throws InvalidInputException, StatLargerThanPoolException {
+        character.setHP(10);
+        character.setDEF(500);
+
+        otherCharacter.setATK(50);
+
+        character.attackedBy(otherCharacter);
+        assertEquals(10, character.getHP());
+    }
+
+    @Test
     public void testIsDeadTrue() {
         assertTrue(character.isDead());
     }

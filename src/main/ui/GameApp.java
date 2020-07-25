@@ -1,9 +1,6 @@
 package ui;
 
-import exceptions.CharacterAlreadyExistsException;
-import exceptions.CharacterDoesntExistException;
-import exceptions.InvalidInputException;
-import exceptions.StatLargerThanPoolException;
+import exceptions.*;
 import model.Boss;
 import model.Character;
 import model.CharacterList;
@@ -259,7 +256,11 @@ public class GameApp {
         String name2 = input.next();
         Character p2 = list.getCharacter(name2);
         System.out.println(name2 + " was chosen to be fighter 2");
-        combatSimulation(p1, p2);
+        try {
+            combatSimulation(p1, p2);
+        } catch (StalemateException e) {
+            System.out.println("They were evenly matched! The battle was a tie!");
+        }
     }
 
     // EFFECTS: prompts player to select a character to fight a boss until one dies
@@ -270,23 +271,32 @@ public class GameApp {
         String name = input.next();
         Character c = list.getCharacter(name);
         System.out.println(name + " was chosen to fight " + boss.getName());
-        combatSimulation(c, boss);
+        try {
+            combatSimulation(c, boss);
+        } catch (StalemateException e) {
+            System.out.println("They were evenly matched! The battle was a tie!");
+        }
     }
 
     // EFFECTS: Represents a fight between the two selected combatants
-    private void combatSimulation(Combatant p1, Combatant p2) {
+    private void combatSimulation(Combatant p1, Combatant p2) throws StalemateException {
+        int damage1 = p1.getATK() - p2.getDEF();
+        int damage2 = p2.getATK() - p1.getDEF();
+
+        if ((damage1 <= 0) && (damage2 <= 0)) {
+            throw new StalemateException();
+        }
+
         System.out.println("\nLet the battle begin!");
         while (!p1.isDead() && !p2.isDead()) {
-            int damage1 = p1.getATK() - p2.getDEF();
-            int damage2 = p2.getATK() - p1.getDEF();
             System.out.println(p1.getName() + ": " + p1.getQuote());
             p2.attackedBy(p1);
-            System.out.println(p1.getName() + " attacked " + p2.getName() + " and did " + damage1 + " damage!");
+            damageMessage(p1, p2, damage1);
             System.out.println(p2.getName() + " has " + p2.getHP() + " HP remaining!");
             if (!p2.isDead()) {
                 System.out.println(p2.getName() + ": " + p2.getQuote());
                 p1.attackedBy(p2);
-                System.out.println(p2.getName() + " attacked " + p1.getName() + " and did " + damage2 + " damage!");
+                damageMessage(p2, p1, damage2);
                 System.out.println(p1.getName() + " has " + p1.getHP() + " HP remaining!");
             }
         }
@@ -294,6 +304,15 @@ public class GameApp {
             System.out.println(p1.getName() + " can no longer fight!  " + p2.getName() + " wins!");
         } else {
             System.out.println(p2.getName() + " can no longer fight! " + p1.getName() + " wins!");
+        }
+    }
+
+    // EFFECTS: if damage was > 0, prints ordinary damage number in message, else prints 0 damage dealt
+    private void damageMessage(Combatant p1, Combatant p2, int damage) {
+        if (damage > 0) {
+            System.out.println(p1.getName() + " attacked " + p2.getName() + " and did " + damage + " damage!");
+        } else {
+            System.out.println(p1.getName() + " attacked " + p2.getName() + " and did 0 damage!");
         }
     }
 
