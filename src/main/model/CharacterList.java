@@ -1,5 +1,8 @@
 package model;
 
+import exceptions.CharacterAlreadyExistsException;
+import exceptions.CharacterDoesntExistException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,29 +15,30 @@ public class CharacterList {
         list = new ArrayList<>();
     }
 
+    // REQUIRES: duplicate characters cannot be added
     // MODIFIES: this
     // EFFECTS: adds the character into the list
     public void addCharacter(Character c) {
         list.add(c);
     }
 
-    // REQUIRES: character exists in the list
     // MODIFIES: this
     // EFFECTS: removes the character from the list
-    public void removeCharacter(Character c) {
+    public void removeCharacter(Character c) throws CharacterDoesntExistException {
+        if (!list.contains(c)) {
+            throw new CharacterDoesntExistException();
+        }
         list.remove(c);
     }
 
-    // REQUIRES: character exists in the list
     // EFFECTS: finds the character in the list and returns it
-    public Character getCharacter(String name) {
-        Character selected = null;
-        for (Character c: list) {
-            if (c.getName() == name) {
-                selected = c;
+    public Character getCharacter(String name) throws CharacterDoesntExistException {
+        for (Character c : list) {
+            if (c.getName().equals(name)) {
+                return c;
             }
         }
-        return selected;
+        throw new CharacterDoesntExistException();
     }
 
     // EFFECTS: prints a list of character names in the list
@@ -44,6 +48,16 @@ public class CharacterList {
             names = names + " " + c.getName() + ",";
         }
         return names;
+    }
+
+    // EFFECTS: if the given name already belongs to a member of the list, return true, otherwise return false
+    public boolean isNameTaken(String name) {
+        for (Character c : list) {
+            if (c.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Getters

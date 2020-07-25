@@ -1,5 +1,9 @@
 package model;
 
+import exceptions.CharacterAlreadyExistsException;
+import exceptions.InvalidInputException;
+import exceptions.StatLargerThanPoolException;
+
 // Represents a character created by the player
 public class Character extends Combatant {
     private int statPool;
@@ -7,10 +11,9 @@ public class Character extends Combatant {
     // Constructs a character with an initial stat pool of 100
     public Character() {
         super();
-        statPool = 500;
+        statPool = 1000;
     }
 
-    // REQUIRES: char length is at least >= 1; character name doesn't already exist
     // MODIFIES: this
     // EFFECTS: sets the name of the character
     public void setName(String name) {
@@ -20,7 +23,13 @@ public class Character extends Combatant {
     // REQUIRES: hp > 0, hp <= stat pool
     // MODIFIES: this
     // EFFECTS: sets the HP stat of the character and subtracts the same amount from the stat pool
-    public void setHP(int hp) {
+    public void setHP(int hp) throws InvalidInputException, StatLargerThanPoolException {
+        if (hp < 1) {
+            throw new InvalidInputException();
+        }
+        if (hp > statPool) {
+            throw new StatLargerThanPoolException();
+        }
         this.hp = hp;
         statPool = statPool - hp;
     }
@@ -28,7 +37,10 @@ public class Character extends Combatant {
     // REQUIRES: atk <= stat pool
     // MODIFIES: this
     // EFFECTS: sets the ATK stat of the character and subtracts the same amount from the stat pool
-    public void setATK(int atk) {
+    public void setATK(int atk) throws StatLargerThanPoolException {
+        if (atk > statPool) {
+            throw new StatLargerThanPoolException();
+        }
         this.atk = atk;
         statPool = statPool - atk;
     }
@@ -36,7 +48,10 @@ public class Character extends Combatant {
     // REQUIRES: def <= stat pool
     // MODIFIES: this
     // EFFECTS: sets the DEF stat of the character and subtracts the same amount from the stat pool
-    public void setDEF(int def) {
+    public void setDEF(int def) throws StatLargerThanPoolException {
+        if (def > statPool) {
+            throw new StatLargerThanPoolException();
+        }
         this.def = def;
         statPool = statPool - def;
     }

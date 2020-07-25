@@ -1,5 +1,8 @@
 package model;
 
+import exceptions.CharacterAlreadyExistsException;
+import exceptions.CharacterDoesntExistException;
+import exceptions.InvalidInputException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,12 +44,27 @@ public class CharacterListTest {
     @Test
     public void testRemoveCharacter() {
         list.addCharacter(character);
-        list.removeCharacter(character);
+        try {
+            list.removeCharacter(character);
+        } catch (CharacterDoesntExistException e) {
+            fail("Unexpected exception call");
+        }
         assertEquals(0, list.getSize());
     }
 
     @Test
-    public void testRemoveTwoCharacters() {
+    public void testRemoveCharacterDoesntExist() {
+        list.addCharacter(character);
+        try {
+            list.removeCharacter(otherCharacter);
+        } catch (CharacterDoesntExistException e) {
+            // expected
+        }
+        assertEquals(1, list.getSize());
+    }
+
+    @Test
+    public void testRemoveTwoCharacters() throws CharacterDoesntExistException {
         list.addCharacter(character);
         list.addCharacter(otherCharacter);
         list.removeCharacter(character);
@@ -58,11 +76,26 @@ public class CharacterListTest {
     @Test
     public void testGetCharacter() {
         list.addCharacter(character);
-        assertEquals(character, list.getCharacter("Name"));
+        try {
+            assertEquals(character, list.getCharacter("Name"));
+        } catch (CharacterDoesntExistException e) {
+            fail("Unexpected exception call");
+        }
     }
 
     @Test
-    public void testGetCharacterFromMultiList() {
+    public void testGetCharacterDoesntExist() {
+        list.addCharacter(character);
+        try {
+            list.getCharacter("Name2");
+            fail("Unexpected exception call");
+        } catch (CharacterDoesntExistException e) {
+            //expect this
+        }
+    }
+
+    @Test
+    public void testGetCharacterFromMultiList() throws CharacterDoesntExistException {
         list.addCharacter(character);
         list.addCharacter(otherCharacter);
         assertEquals(otherCharacter, list.getCharacter("Name2"));
@@ -76,10 +109,22 @@ public class CharacterListTest {
     }
 
     @Test
-    public void testAddRemoveThenPrintCharacters() {
+    public void testAddRemoveThenPrintCharacters() throws CharacterDoesntExistException {
         list.addCharacter(character);
         list.addCharacter(otherCharacter);
         list.removeCharacter(otherCharacter);
         assertEquals("Here are your current characters: Name," , list.printCharacters());
+    }
+
+    @Test
+    public void testisNameTakenTrue() {
+        list.addCharacter(character);
+        assertTrue(list.isNameTaken("Name"));
+    }
+
+    @Test
+    public void testisNameTakenFalse() {
+        list.addCharacter(character);
+        assertFalse(list.isNameTaken("Name2"));
     }
 }

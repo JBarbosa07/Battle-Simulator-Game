@@ -1,4 +1,4 @@
 package exceptions;
 
-public class StatLargerThanPoolException extends InvalidInputException {
+public class StatLargerThanPoolException extends Exception {
 }

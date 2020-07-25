@@ -17,9 +17,9 @@ public class BossTest {
     @Test
     public void testBoss() {
         assertEquals("DESTROYER", boss.getName());
-        assertEquals(1000, boss.getHP());
-        assertEquals(500, boss.getATK());
-        assertEquals(400, boss.getDEF());
+        assertEquals(1200, boss.getHP());
+        assertEquals(200, boss.getATK());
+        assertEquals(100, boss.getDEF());
         assertEquals("DIE SCUM", boss.getQuote());
     }
 }

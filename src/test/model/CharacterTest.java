@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.InvalidInputException;
+import exceptions.StatLargerThanPoolException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +20,7 @@ class CharacterTest {
 
     @Test
     public void testCharacter() {
-        assertEquals(500, character.getStatPool());
+        assertEquals(1000, character.getStatPool());
     }
 
     @Test
@@ -29,30 +31,100 @@ class CharacterTest {
 
     @Test
     public void testSetHPValid() {
-        character.setHP(250);
-        assertEquals(250, character.getHP());
-        assertEquals(500-250, character.getStatPool());
+        try {
+            character.setHP(340);
+        } catch (InvalidInputException e) {
+           fail("Unexpected exception call");
+        } catch (StatLargerThanPoolException e) {
+            fail("Unexpected exception call");
+        }
+        assertEquals(340, character.getHP());
+        assertEquals(1000-340, character.getStatPool());
+    }
+
+    @Test
+    public void testSetHPInvalid() {
+        try {
+            character.setHP(0);
+            fail("Should fail");
+        } catch (InvalidInputException e) {
+            // expected
+        } catch (StatLargerThanPoolException e) {
+            fail("Unexpected exception call");
+        }
+        assertEquals(0, character.getHP());
+        assertEquals(1000, character.getStatPool());
+    }
+
+    @Test
+    public void testSetHPExceedsPool() {
+        try {
+            character.setHP(1100);
+            fail("Should fail");
+        } catch (InvalidInputException e) {
+            fail("Unexpected exception call");
+        } catch (StatLargerThanPoolException e) {
+            // expected
+        }
+        assertEquals(0, character.getHP());
+        assertEquals(1000, character.getStatPool());
     }
 
     @Test
     public void testSetATKValid() {
-        character.setATK(150);
-        assertEquals(150, character.getATK());
-        assertEquals(500-150, character.getStatPool());
+        try {
+            character.setATK(440);
+        } catch (StatLargerThanPoolException e) {
+            fail("Unexpected exception call");
+        }
+        assertEquals(440, character.getATK());
+        assertEquals(1000-440, character.getStatPool());
+    }
+
+    @Test
+    public void testSetATKInvalid() {
+        try {
+            character.setATK(1100);
+            fail("Unexpected exception call");
+        } catch (StatLargerThanPoolException e) {
+            // expected
+        }
+        assertEquals(0, character.getATK());
+        assertEquals(1000, character.getStatPool());
     }
 
     @Test
     public void testSetDEFValid() {
-        character.setDEF(100);
-        assertEquals(100, character.getDEF());
-        assertEquals(500-100, character.getStatPool());
+        try {
+            character.setDEF(220);
+        } catch (StatLargerThanPoolException e) {
+            fail("Unexpected exception call");
+        }
+        assertEquals(220, character.getDEF());
+        assertEquals(1000-220, character.getStatPool());
     }
 
     @Test
-    public void testSetAllStatsValid() {
-        character.setHP(250);
-        character.setATK(150);
-        character.setDEF(100);
+    public void testSetDEFInvalid() {
+        try {
+            character.setDEF(1100);
+            fail("Unexpected exception call");
+        } catch (StatLargerThanPoolException e) {
+            //expect
+        }
+        assertEquals(0, character.getDEF());
+        assertEquals(1000, character.getStatPool());
+    }
+
+    @Test
+    public void testSetAllStatsValid() throws InvalidInputException {
+        try {
+            character.setHP(340);
+            character.setATK(440);
+            character.setDEF(220);
+        } catch (StatLargerThanPoolException e) {
+            fail("Unexpected exception call");
+        }
         assertEquals(0, character.getStatPool());
     }
 
@@ -63,18 +135,18 @@ class CharacterTest {
     }
 
     @Test
-    public void testViewCharacter() {
+    public void testViewCharacter() throws InvalidInputException, StatLargerThanPoolException {
         character.setName("Name");
-        character.setHP(250);
-        character.setATK(150);
-        character.setDEF(100);
+        character.setHP(340);
+        character.setATK(440);
+        character.setDEF(220);
         character.setQuote("Hyah!");
-        assertEquals("Name - HP: 250, ATK: 150, DEF: 100, Quote: Hyah!",
+        assertEquals("Name - HP: 340, ATK: 440, DEF: 220, Quote: Hyah!",
                 character.printCharacter());
     }
 
     @Test
-    public void testAttacked() {
+    public void testAttacked() throws InvalidInputException, StatLargerThanPoolException {
         character.setHP(50);
         character.setDEF(30);
 
@@ -85,7 +157,7 @@ class CharacterTest {
     }
 
     @Test
-    public void testAttackedOverkill() {
+    public void testAttackedOverkill() throws InvalidInputException, StatLargerThanPoolException {
         character.setHP(10);
 
         otherCharacter.setATK(50);
@@ -100,7 +172,7 @@ class CharacterTest {
     }
 
     @Test
-    public void testIsDeadFalse() {
+    public void testIsDeadFalse() throws InvalidInputException, StatLargerThanPoolException {
         character.setHP(1);
         assertFalse(character.isDead());
     }

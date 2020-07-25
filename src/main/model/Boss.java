@@ -3,9 +3,9 @@ package model;
 // Represents a boss combatant in the game
 public class Boss extends Combatant {
     private final String bossName = "DESTROYER";
-    private int bossHP = 1000;
-    private final int bossATK = 500;
-    private final int bossDEF = 400;
+    private int bossHP = 1200;
+    private final int bossATK = 200;
+    private final int bossDEF = 100;
     private final String bossQuote = "DIE SCUM";
 
     public Boss() {
