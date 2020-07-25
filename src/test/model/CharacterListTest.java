@@ -1,8 +1,6 @@
 package model;
 
-import exceptions.CharacterAlreadyExistsException;
-import exceptions.CharacterDoesntExistException;
-import exceptions.InvalidInputException;
+import model.exceptions.CharacterDoesntExistException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

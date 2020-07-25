@@ -1,10 +1,15 @@
 package ui;
 
-import exceptions.*;
 import model.Boss;
 import model.Character;
 import model.CharacterList;
 import model.Combatant;
+import model.exceptions.CharacterDoesntExistException;
+import model.exceptions.InvalidInputException;
+import model.exceptions.StatLargerThanPoolException;
+import ui.exceptions.CharacterAlreadyExistsException;
+import ui.exceptions.InputtedNonIntException;
+import ui.exceptions.StalemateException;
 
 import java.util.Scanner;
 
@@ -52,6 +57,9 @@ public class GameApp {
                 System.err.println("That character already exists");
             } catch (InvalidInputException e) {
                 System.err.println("The HP stat cannot be 0 or less");
+            }  catch (InputtedNonIntException e) {
+                System.err.println("Must input an integer");
+                input.next();
             } catch (StatLargerThanPoolException e) {
                 System.err.println("The inputted value must not exceed stat pool");
             }
@@ -59,6 +67,8 @@ public class GameApp {
             manageCharacters();
         } else if (command.equals("b")) {
             battle();
+        } else {
+            System.err.println("Selection not valid");
         }
     }
 
@@ -73,6 +83,8 @@ public class GameApp {
             }
         } else if (command.equals("d")) {
             deleteCharacter();
+        } else {
+            System.err.println("Selection not valid");
         }
     }
 
@@ -92,7 +104,7 @@ public class GameApp {
                 System.err.println("That character does not exist");
             }
         } else {
-            System.err.println("Selection not valid...");
+            System.err.println("Selection not valid");
         }
     }
 
@@ -111,7 +123,7 @@ public class GameApp {
         System.out.println("\nWhat would you like to do?");
         System.out.println("\tv -> view a character");
         System.out.println("\td -> delete a character");
-        System.out.println("\tb -> go back");
+        System.out.println("\tr -> return to previous menu");
     }
 
     // EFFECTS: displays character manager options to player
@@ -119,13 +131,13 @@ public class GameApp {
         System.out.println("\nWhat would you like to do?");
         System.out.println("\tpvp -> have two characters fight each other");
         System.out.println("\tpvb -> have a character fight a boss");
-        System.out.println("\tb -> go back");
+        System.out.println("\tr -> return to previous menu");
     }
 
     // MODIFIES: this
     // EFFECTS: allows player to create a new character
     private void createCharacter() throws InvalidInputException, StatLargerThanPoolException,
-            CharacterAlreadyExistsException {
+            CharacterAlreadyExistsException, InputtedNonIntException {
         Character character = new Character();
         enterName(character);
         enterHP(character);
@@ -149,8 +161,12 @@ public class GameApp {
     }
 
     // EFFECTS: prompts the player to set HP
-    private void enterHP(Character c) throws InvalidInputException, StatLargerThanPoolException {
+    private void enterHP(Character c) throws InvalidInputException, StatLargerThanPoolException,
+            InputtedNonIntException {
         System.out.println("Please enter the character's HP value. Stat pool: " + c.getStatPool());
+        if (!input.hasNextInt()) {
+            throw new InputtedNonIntException();
+        }
         int hp = input.nextInt();
         c.setHP(hp);
         System.out.println("Character's HP is now " + c.getHP());
@@ -158,8 +174,11 @@ public class GameApp {
     }
 
     // EFFECTS: prompts the player to set ATK
-    private void enterATK(Character c) throws StatLargerThanPoolException {
+    private void enterATK(Character c) throws StatLargerThanPoolException, InputtedNonIntException {
         System.out.println("Please enter the character's ATK value. Stat pool: " + c.getStatPool());
+        if (!input.hasNextInt()) {
+            throw new InputtedNonIntException();
+        }
         int atk = input.nextInt();
         c.setATK(atk);
         System.out.println("Character's ATK is now " + c.getATK());
@@ -167,8 +186,11 @@ public class GameApp {
     }
 
     // EFFECTS: prompts the player to set DEF
-    private void enterDEF(Character c) throws StatLargerThanPoolException {
+    private void enterDEF(Character c) throws StatLargerThanPoolException, InputtedNonIntException {
         System.out.println("Please enter the character's DEF value. Stat pool: " + c.getStatPool());
+        if (!input.hasNextInt()) {
+            throw new InputtedNonIntException();
+        }
         int def = input.nextInt();
         c.setDEF(def);
         System.out.println("Character's DEF is now " + c.getDEF());
@@ -195,7 +217,7 @@ public class GameApp {
             command = input.next();
             command = command.toLowerCase();
 
-            if (command.equals("b")) {
+            if (command.equals("r")) {
                 keepGoing = false;
             } else {
                 processCommandManager(command);
@@ -235,7 +257,7 @@ public class GameApp {
             command = input.next();
             command = command.toLowerCase();
 
-            if (command.equals("b")) {
+            if (command.equals("r")) {
                 keepGoing = false;
             } else {
                 processCommandBattle(command);

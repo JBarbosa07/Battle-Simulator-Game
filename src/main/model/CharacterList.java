@@ -1,7 +1,6 @@
 package model;
 
-import exceptions.CharacterAlreadyExistsException;
-import exceptions.CharacterDoesntExistException;
+import model.exceptions.CharacterDoesntExistException;
 
 import java.util.ArrayList;
 import java.util.List;

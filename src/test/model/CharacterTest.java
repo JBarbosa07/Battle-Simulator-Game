@@ -1,7 +1,7 @@
 package model;
 
-import exceptions.InvalidInputException;
-import exceptions.StatLargerThanPoolException;
+import model.exceptions.InvalidInputException;
+import model.exceptions.StatLargerThanPoolException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

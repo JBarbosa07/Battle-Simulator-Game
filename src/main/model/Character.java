@@ -1,8 +1,7 @@
 package model;
 
-import exceptions.CharacterAlreadyExistsException;
-import exceptions.InvalidInputException;
-import exceptions.StatLargerThanPoolException;
+import model.exceptions.InvalidInputException;
+import model.exceptions.StatLargerThanPoolException;
 
 // Represents a character created by the player
 public class Character extends Combatant {
