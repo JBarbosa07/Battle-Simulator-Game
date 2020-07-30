@@ -86,7 +86,7 @@ public class CharacterListTest {
         list.addCharacter(character);
         try {
             list.getCharacter("Name2");
-            fail("Unexpected exception call");
+            fail("Should fail");
         } catch (CharacterDoesntExistException e) {
             //expect this
         }

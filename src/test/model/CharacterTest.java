@@ -85,7 +85,7 @@ class CharacterTest {
     public void testSetATKInvalid() {
         try {
             character.setATK(1100);
-            fail("Unexpected exception call");
+            fail("Should fail");
         } catch (StatLargerThanPoolException e) {
             // expected
         }
@@ -108,7 +108,7 @@ class CharacterTest {
     public void testSetDEFInvalid() {
         try {
             character.setDEF(1100);
-            fail("Unexpected exception call");
+            fail("Should fail");
         } catch (StatLargerThanPoolException e) {
             //expect
         }

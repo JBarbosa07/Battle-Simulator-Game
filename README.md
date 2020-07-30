@@ -32,3 +32,5 @@ project in order to practice skills such as character creation and designing a c
 * As a user, I want to be able to select a character from the list and delete them from it
 * As a user, I want to be able to select two of my characters from my list of characters and have them engage in combat
 * As a user, I want to be able to select one of my characters from the list and have them challenge the boss
+* As a user, I want to be able to save my characters/list of characters to file
+* As a user, I want to be able to reload my list of characters whenever I return to the game
