@@ -7,9 +7,9 @@ import model.exceptions.StatLargerThanPoolException;
 public class Character extends Combatant {
     private int statPool;
 
-    // Constructs a character with an initial stat pool of 100
+    // Constructs a character with an initial stat pool of 1000
     public Character() {
-        super();
+        super(null, 0, 0, 0, null);
         statPool = 1000;
     }
 
@@ -19,9 +19,9 @@ public class Character extends Combatant {
         this.name = name;
     }
 
-    // REQUIRES: hp > 0, hp <= stat pool
     // MODIFIES: this
-    // EFFECTS: sets the HP stat of the character and subtracts the same amount from the stat pool
+    // EFFECTS: sets the HP stat of the character and subtracts the same amount from the stat pool; if hp <= 0, throws
+    // InvalidInputException; if hp > stat pool, throws StatLargerThanPoolException
     public void setHP(int hp) throws InvalidInputException, StatLargerThanPoolException {
         if (hp < 1) {
             throw new InvalidInputException();
@@ -33,9 +33,9 @@ public class Character extends Combatant {
         statPool = statPool - hp;
     }
 
-    // REQUIRES: atk <= stat pool
     // MODIFIES: this
-    // EFFECTS: sets the ATK stat of the character and subtracts the same amount from the stat pool
+    // EFFECTS: sets the ATK stat of the character and subtracts the same amount from the stat pool; if atk > stat pool,
+    // throws StatLargerThanPoolException
     public void setATK(int atk) throws StatLargerThanPoolException {
         if (atk > statPool) {
             throw new StatLargerThanPoolException();
@@ -44,9 +44,9 @@ public class Character extends Combatant {
         statPool = statPool - atk;
     }
 
-    // REQUIRES: def <= stat pool
     // MODIFIES: this
-    // EFFECTS: sets the DEF stat of the character and subtracts the same amount from the stat pool
+    // EFFECTS: sets the DEF stat of the character and subtracts the same amount from the stat pool; if def > stat pool,
+    // throws StatLargerThanPoolException
     public void setDEF(int def) throws StatLargerThanPoolException {
         if (def > statPool) {
             throw new StatLargerThanPoolException();

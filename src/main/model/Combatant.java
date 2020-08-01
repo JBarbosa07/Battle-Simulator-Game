@@ -1,39 +1,35 @@
 package model;
 
+import java.util.Objects;
+
 // Represents a combatant in the game
-public abstract class Combatant implements Fightable {
+public abstract class Combatant {
     protected String name;
     protected int hp;
     protected int atk;
     protected int def;
     protected String quote;
 
-    public Combatant() {
-        this.name = null;
-        this.hp = 0;
-        this.atk = 0;
-        this.def = 0;
-        this.quote = null;
+    public Combatant(String name, int hp, int atk, int def, String quote) {
+        this.name = name;
+        this.hp = hp;
+        this.atk = atk;
+        this.def = def;
+        this.quote = quote;
     }
 
     // MODIFIES: this
     // EFFECTS: decreases the character's hp by (opponent's ATK - character's def). If the damage dealt exceeds the hp
     // remaining, stop the hp decrease at 0.
-    @Override
     public void attackedBy(Combatant c) {
         int damage = (c.getATK() - def);
         if (damage < 0) {
             damage = 0;
         }
-        if (hp - damage >= 0) {
-            hp = hp - damage;
-        } else {
-            hp = 0;
-        }
+        hp = Math.max(hp - damage, 0);
     }
 
     // EFFECTS: if combatant's hp is 0, returns true, otherwise returns false
-    @Override
     public boolean isDead() {
         return hp == 0;
     }
@@ -57,5 +53,22 @@ public abstract class Combatant implements Fightable {
 
     public String getQuote() {
         return quote;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Combatant combatant = (Combatant) o;
+        return Objects.equals(name, combatant.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

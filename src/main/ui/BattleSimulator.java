@@ -10,13 +10,18 @@ import model.exceptions.StatLargerThanPoolException;
 import ui.exceptions.CharacterAlreadyExistsException;
 import ui.exceptions.InputtedNonIntException;
 import ui.exceptions.StalemateException;
+import persistence.Reader;
+import persistence.Writer;
+
+import java.io.*;
 
 import java.util.Scanner;
 
-// NOTE: I referenced the TellerApp for the implementation of the Scanner code in the ui
+// NOTE: I referenced the TellerApp for the implementation of the Scanner code and file saving function in the ui
 
 // The RPG battle simulator application
 public class BattleSimulator {
+    private static final String LIST_FILE = "./data/characterList.txt";
     private CharacterList list;
     private Scanner input;
 
@@ -29,7 +34,8 @@ public class BattleSimulator {
         boolean keepGoing = true;
         String command;
         input = new Scanner(System.in);
-        list = new CharacterList();
+
+        loadAccounts();
 
         while (keepGoing) {
             displayMenu();
@@ -45,6 +51,32 @@ public class BattleSimulator {
 
         System.out.println("Thanks for playing!");
 
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads character list from LIST_FILE, if that file exists;
+    // otherwise initializes empty list
+    private void loadAccounts() {
+        try {
+            list = Reader.readList(new File(LIST_FILE));
+        } catch (IOException e) {
+            list = new CharacterList();
+        }
+    }
+
+    // EFFECTS: saves character list to LIST_FILE
+    private void saveList() {
+        try {
+            Writer writer = new Writer(new File(LIST_FILE));
+            writer.write(list);
+            writer.close();
+            System.out.println("Characters have been saved to " + LIST_FILE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save characters to " + LIST_FILE);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            // this is due to a programming error
+        }
     }
 
     // MODIFIES: this
@@ -67,6 +99,8 @@ public class BattleSimulator {
             manageCharacters();
         } else if (command.equals("b")) {
             battle();
+        } else if (command.equals("s")) {
+            saveList();
         } else {
             System.err.println("Selection not valid");
         }
@@ -114,6 +148,7 @@ public class BattleSimulator {
         System.out.println("\tc -> create new character");
         System.out.println("\tm -> manage characters");
         System.out.println("\tb -> battle");
+        System.out.println("\ts -> save your data");
         System.out.println("\tq -> quit");
     }
 
@@ -148,7 +183,8 @@ public class BattleSimulator {
         System.out.println(character.getName() + " was successfully created!");
     }
 
-    // EFFECTS: prompts the player to set a name
+    // EFFECTS: prompts the player to set a name; if a character has already taken the name, throws
+    // CharacterAlreadyExistsException
     private void enterName(Character c) throws CharacterAlreadyExistsException {
         System.out.println("Let's create a new character!");
         System.out.println("Please enter the character's name.");
@@ -300,7 +336,8 @@ public class BattleSimulator {
         }
     }
 
-    // EFFECTS: Represents a fight between the two selected combatants
+    // EFFECTS: Represents a fight between the two selected combatants; if both combatants deal 0 damage to each other,
+    // throws StalemateException
     private void combatSimulation(Combatant p1, Combatant p2) throws StalemateException {
         int damage1 = p1.getATK() - p2.getDEF();
         int damage2 = p2.getATK() - p1.getDEF();

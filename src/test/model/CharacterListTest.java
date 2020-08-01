@@ -29,6 +29,7 @@ public class CharacterListTest {
     @Test
     public void testAddCharacter() {
         list.addCharacter(character);
+        assertTrue(list.isContained(character));
         assertEquals(1, list.getSize());
     }
 
@@ -36,38 +37,55 @@ public class CharacterListTest {
     public void testAddTwoCharacters() {
         list.addCharacter(character);
         list.addCharacter(otherCharacter);
+        assertTrue(list.isContained(character));
+        assertTrue(list.isContained(otherCharacter));
         assertEquals(2, list.getSize());
     }
 
     @Test
     public void testRemoveCharacter() {
         list.addCharacter(character);
+        assertTrue(list.isContained(character));
+        assertEquals(1, list.getSize());
         try {
             list.removeCharacter(character);
         } catch (CharacterDoesntExistException e) {
             fail("Unexpected exception call");
         }
+        assertFalse(list.isContained(character));
         assertEquals(0, list.getSize());
     }
 
     @Test
     public void testRemoveCharacterDoesntExist() {
         list.addCharacter(character);
+        assertTrue(list.isContained(character));
+        assertEquals(1, list.getSize());
         try {
             list.removeCharacter(otherCharacter);
+            fail("should fail");
         } catch (CharacterDoesntExistException e) {
             // expected
         }
+        assertTrue(list.isContained(character));
         assertEquals(1, list.getSize());
     }
 
     @Test
-    public void testRemoveTwoCharacters() throws CharacterDoesntExistException {
+    public void testRemoveTwoCharacters() {
         list.addCharacter(character);
         list.addCharacter(otherCharacter);
-        list.removeCharacter(character);
-        assertEquals(1, list.getSize());
-        list.removeCharacter(otherCharacter);
+        assertTrue(list.isContained(character));
+        assertTrue(list.isContained(otherCharacter));
+        assertEquals(2, list.getSize());
+        try {
+            list.removeCharacter(character);
+            list.removeCharacter(otherCharacter);
+        } catch (CharacterDoesntExistException e) {
+            fail("Unexpected exception call");
+        }
+        assertFalse(list.isContained(character));
+        assertFalse(list.isContained(otherCharacter));
         assertEquals(0, list.getSize());
     }
 

@@ -1,17 +1,26 @@
 package model;
 
+import com.google.gson.Gson;
 import model.exceptions.CharacterDoesntExistException;
+import persistence.Saveable;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents a list of characters created by the player
-public class CharacterList {
+public class CharacterList implements Saveable {
     List<Character> list;
 
-    // EFFECTS: constructs an empty CharacterList
+    // EFFECTS: constructs an empty character list
     public CharacterList() {
         list = new ArrayList<>();
+    }
+
+    // EFFECTS: constructs a character list with a list of characters
+    // NOTE: this constructor is to be used only when constructing a character list from data stored in file
+    public CharacterList(List<Character> list) {
+        this.list = list;
     }
 
     // REQUIRES: duplicate characters cannot be added
@@ -22,7 +31,7 @@ public class CharacterList {
     }
 
     // MODIFIES: this
-    // EFFECTS: removes the character from the list
+    // EFFECTS: removes the character from the list; if character does not exist, throws CharacterDoesntExistException
     public void removeCharacter(Character c) throws CharacterDoesntExistException {
         if (!list.contains(c)) {
             throw new CharacterDoesntExistException();
@@ -30,7 +39,8 @@ public class CharacterList {
         list.remove(c);
     }
 
-    // EFFECTS: finds the character in the list and returns it
+    // EFFECTS: finds the character in the list and returns it; if character does not exist, throws
+    // CharacterDoesntExistException
     public Character getCharacter(String name) throws CharacterDoesntExistException {
         for (Character c : list) {
             if (c.getName().equals(name)) {
@@ -64,4 +74,13 @@ public class CharacterList {
         return list.size();
     }
 
+    public boolean isContained(Character c) {
+        return list.contains(c);
+    }
+
+    @Override
+    public void save(PrintWriter printWriter) {
+        Gson g = new Gson();
+        printWriter.print(g.toJson(this));
+    }
 }

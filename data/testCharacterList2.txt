@@ -1,0 +1,1 @@
+{"list":[{"statPool":0,"name":"Guy","hp":500,"atk":500,"def":0,"quote":"Bruh"},{"statPool":0,"name":"Dude","hp":400,"atk":300,"def":300,"quote":"En garde!"}]}
