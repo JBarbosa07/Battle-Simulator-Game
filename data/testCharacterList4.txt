@@ -1,0 +1,1 @@
+{"list":[{"statPool":1000,"name":"Name","hp":0,"atk":0,"def":0},{"statPool":1000,"name":"Name2","hp":0,"atk":0,"def":0}]}
