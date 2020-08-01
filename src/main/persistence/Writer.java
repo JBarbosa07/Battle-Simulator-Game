@@ -29,8 +29,8 @@ public class Writer {
         printWriter.close();
     }
 
-    // Getters
-    public PrintWriter getPrintWriter() {
-        return printWriter;
-    }
+//    // Getters
+//    public PrintWriter getPrintWriter() {
+//        return printWriter;
+//    }
 }
