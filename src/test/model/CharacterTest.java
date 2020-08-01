@@ -33,10 +33,8 @@ class CharacterTest {
     public void testSetHPValid() {
         try {
             character.setHP(340);
-        } catch (InvalidInputException e) {
+        } catch (InvalidInputException | StatLargerThanPoolException e) {
            fail("Unexpected exception call");
-        } catch (StatLargerThanPoolException e) {
-            fail("Unexpected exception call");
         }
         assertEquals(340, character.getHP());
         assertEquals(1000-340, character.getStatPool());
@@ -192,7 +190,7 @@ class CharacterTest {
     public void testEqualsTrue() {
         character.setName("Player1");
         otherCharacter.setName("Player1");
-        assertTrue(character.equals(otherCharacter));
+        assertEquals(character, otherCharacter);
         assertEquals(character.hashCode(), otherCharacter.hashCode());
     }
 
@@ -200,12 +198,19 @@ class CharacterTest {
     public void testEqualsFalse() {
         character.setName("Player1");
         otherCharacter.setName("Player2");
-        assertFalse(character.equals(otherCharacter));
+        assertNotEquals(character, otherCharacter);
     }
 
     @Test
     public void testEqualsNull() {
         character.setName("Player1");
-        assertFalse(character.equals(null));
+        assertNotEquals(null, character);
     }
+
+    @Test
+    public void testEqualsDifferentClass() {
+        Boss boss = new Boss();
+        assertNotEquals(character, boss);
+    }
+
 }
