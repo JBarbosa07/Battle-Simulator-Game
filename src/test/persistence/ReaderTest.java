@@ -2,6 +2,7 @@ package persistence;
 
 import model.Character;
 import model.CharacterList;
+import persistence.Reader;
 import model.exceptions.CharacterDoesntExistException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ReaderTest {
+    Reader reader;
     Character p1;
     Character p2;
     Character p3;
@@ -19,6 +21,7 @@ public class ReaderTest {
 
     @BeforeEach
     void runBefore() {
+        reader = new Reader();
         p1 = new Character();
         p2 = new Character();
         p3 = new Character();
@@ -32,7 +35,7 @@ public class ReaderTest {
     @Test
     void testParseAccountsFile1() throws CharacterDoesntExistException {
         try {
-            CharacterList list = Reader.readList(new File("./data/testCharacterList2.txt"));
+            CharacterList list = reader.readList(new File("./data/testCharacterList2.txt"));
             Character p1Copy = list.getCharacter("Guy");
             Character p2Copy = list.getCharacter("Dude");
 
