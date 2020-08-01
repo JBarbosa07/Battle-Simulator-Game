@@ -187,4 +187,25 @@ class CharacterTest {
         character.setHP(1);
         assertFalse(character.isDead());
     }
+
+    @Test
+    public void testEqualsTrue() {
+        character.setName("Player1");
+        otherCharacter.setName("Player1");
+        assertTrue(character.equals(otherCharacter));
+        assertEquals(character.hashCode(), otherCharacter.hashCode());
+    }
+
+    @Test
+    public void testEqualsFalse() {
+        character.setName("Player1");
+        otherCharacter.setName("Player2");
+        assertFalse(character.equals(otherCharacter));
+    }
+
+    @Test
+    public void testEqualsNull() {
+        character.setName("Player1");
+        assertFalse(character.equals(null));
+    }
 }

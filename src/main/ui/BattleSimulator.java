@@ -196,7 +196,7 @@ public class BattleSimulator {
         System.out.println("Character's name is " + c.getName());
     }
 
-    // EFFECTS: prompts the player to set HP
+    // EFFECTS: prompts the player to set HP; if inputted value isn't an integer, throw InputtedNonIntException
     private void enterHP(Character c) throws InvalidInputException, StatLargerThanPoolException,
             InputtedNonIntException {
         System.out.println("Please enter the character's HP value. Stat pool: " + c.getStatPool());
@@ -209,7 +209,7 @@ public class BattleSimulator {
         System.out.println("Stat pool: " + c.getStatPool());
     }
 
-    // EFFECTS: prompts the player to set ATK
+    // EFFECTS: prompts the player to set ATK; if inputted value isn't an integer, throw InputtedNonIntException
     private void enterATK(Character c) throws StatLargerThanPoolException, InputtedNonIntException {
         System.out.println("Please enter the character's ATK value. Stat pool: " + c.getStatPool());
         if (!input.hasNextInt()) {
@@ -221,7 +221,7 @@ public class BattleSimulator {
         System.out.println("Stat pool: " + c.getStatPool());
     }
 
-    // EFFECTS: prompts the player to set DEF
+    // EFFECTS: prompts the player to set DEF; if inputted value isn't an integer, throw InputtedNonIntException
     private void enterDEF(Character c) throws StatLargerThanPoolException, InputtedNonIntException {
         System.out.println("Please enter the character's DEF value. Stat pool: " + c.getStatPool());
         if (!input.hasNextInt()) {

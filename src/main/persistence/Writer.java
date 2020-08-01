@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
+// NOTE: Used TellerApp as a reference for the implementation of code
+
 // A writer that can write character list data to a file
 public class Writer {
     private PrintWriter printWriter;
@@ -25,5 +27,10 @@ public class Writer {
     // NOTE: you MUST call this method when you are done writing data!
     public void close() {
         printWriter.close();
+    }
+
+    // Getters
+    public PrintWriter getPrintWriter() {
+        return printWriter;
     }
 }

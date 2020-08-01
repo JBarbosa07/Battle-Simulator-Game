@@ -17,12 +17,6 @@ public class CharacterList implements Saveable {
         list = new ArrayList<>();
     }
 
-    // EFFECTS: constructs a character list with a list of characters
-    // NOTE: this constructor is to be used only when constructing a character list from data stored in file
-    public CharacterList(List<Character> list) {
-        this.list = list;
-    }
-
     // REQUIRES: duplicate characters cannot be added
     // MODIFIES: this
     // EFFECTS: adds the character into the list

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-// NOTE: Utilized Gson for the implementation of code; used following link as reference:
+// NOTE: Used TellerApp and Gson for the implementation of code; used the following link as references for Gson:
 // https://www.java67.com/2016/10/3-ways-to-convert-string-to-json-object-in-java.html
 
 // A reader that can read account data from a file

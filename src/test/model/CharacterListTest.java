@@ -3,6 +3,11 @@ package model;
 import model.exceptions.CharacterDoesntExistException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import persistence.Writer;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.UnsupportedEncodingException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -143,4 +148,16 @@ public class CharacterListTest {
         list.addCharacter(character);
         assertFalse(list.isNameTaken("Name2"));
     }
+
+//    @Test
+//    public void testSave() throws FileNotFoundException, UnsupportedEncodingException {
+//        String TEST_FILE = "./data/testCharacterList4.txt"
+//        Writer testWriter = new Writer((new File(TEST_FILE)));
+//        list.addCharacter(character);
+//        list.addCharacter(otherCharacter);
+//        testWriter.write(list);
+//        testWriter.close();
+//        list.save(testWriter.getPrintWriter());
+//        assertEquals(, list.save(testWriter.getPrintWriter()));
+//    }
 }
