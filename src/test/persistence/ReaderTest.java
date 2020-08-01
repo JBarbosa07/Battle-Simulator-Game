@@ -1,6 +1,5 @@
 package persistence;
 
-import com.sun.source.tree.AssertTree;
 import model.Character;
 import model.CharacterList;
 import model.exceptions.CharacterDoesntExistException;
