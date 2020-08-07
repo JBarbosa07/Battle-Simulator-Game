@@ -13,6 +13,8 @@ import ui.exceptions.StalemateException;
 import persistence.Reader;
 import persistence.Writer;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 
 import java.util.Scanner;
