@@ -47,10 +47,14 @@ public class CharacterList implements Saveable {
     // EFFECTS: prints a list of character names in the list
     public String printCharacters() {
         String names = "Here are your current characters:";
-        for (Character c : list) {
-            names = names + " " + c.getName() + ",";
+        if (list.isEmpty()) {
+            return names + " You currently do not have any characters";
+        } else {
+            for (Character c : list) {
+                names = names + " " + c.getName() + ",";
+            }
+            return names;
         }
-        return names;
     }
 
     // EFFECTS: if the given name already belongs to a member of the list, return true, otherwise return false

@@ -132,6 +132,12 @@ public class CharacterListTest {
     }
 
     @Test
+    public void testPrintCharactersEmpty() {
+        assertEquals("Here are your current characters: You currently do not have any characters",
+                list.printCharacters());
+    }
+
+    @Test
     public void testAddRemoveThenPrintCharacters() throws CharacterDoesntExistException {
         list.addCharacter(character);
         list.addCharacter(otherCharacter);

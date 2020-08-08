@@ -24,11 +24,11 @@ public class BattleGUI extends TemplateGUI {
     }
 
     private void initializeInstructions() {
-        JButton pvp = new JButton("Character VS Character");
+        JButton pvp = new JButton("Have two characters fight each other");
         pvp.setActionCommand("pvp");
         pvp.addActionListener(this);
 
-        JButton pvb = new JButton("Character VS Boss");
+        JButton pvb = new JButton("Have a character fight a boss");
         pvb.setActionCommand("pvb");
         pvb.addActionListener(this);
 
@@ -41,8 +41,34 @@ public class BattleGUI extends TemplateGUI {
         add(goBack);
     }
 
+    private void characterVsCharacter() {
+        JPanel pvpMenu = new JPanel();
+        cardPanel.add(pvpMenu, "PvP");
+        cardLayout.show(cardPanel, "PvP");
+        JLabel characters = new JLabel(battleSim.getList().printCharacters());
+        pvpMenu.add(characters);
+        JLabel intro = new JLabel("Please select fighter 1");
+        pvpMenu.add(intro);
+    }
+
+    private void characterVsBoss() {
+        JPanel pvbMenu = new JPanel();
+        cardPanel.add(pvbMenu, "PvB");
+        cardLayout.show(cardPanel, "PvB");
+        JLabel characters = new JLabel(battleSim.getList().printCharacters());
+        pvbMenu.add(characters);
+        JLabel intro = new JLabel("Please select fighter 1.");
+        pvbMenu.add(intro);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getActionCommand().equals("pvp")) {
+            characterVsCharacter();
+        }
+        if (e.getActionCommand().equals("pvb")) {
+            characterVsBoss();
+        }
         if (e.getActionCommand().equals("return")) {
             cardLayout.show(cardPanel, "Menu");
         }
