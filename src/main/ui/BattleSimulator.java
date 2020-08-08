@@ -13,8 +13,6 @@ import ui.exceptions.StalemateException;
 import persistence.Reader;
 import persistence.Writer;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.*;
 
 import java.util.Scanner;
@@ -29,7 +27,7 @@ public class BattleSimulator {
 
     // EFFECTS: runs the application
     public BattleSimulator() {
-        runGame();
+//        runGame();
     }
 
     private void runGame() {
@@ -58,7 +56,7 @@ public class BattleSimulator {
     // MODIFIES: this
     // EFFECTS: loads character list from LIST_FILE, if that file exists;
     // otherwise initializes empty list
-    private void loadAccounts() {
+    public void loadAccounts() {
         try {
             list = Reader.readList(new File(LIST_FILE));
         } catch (IOException e) {
@@ -67,7 +65,7 @@ public class BattleSimulator {
     }
 
     // EFFECTS: saves character list to LIST_FILE
-    private void saveList() {
+    public void saveList() {
         try {
             Writer writer = new Writer(new File(LIST_FILE));
             writer.write(list);
@@ -375,5 +373,10 @@ public class BattleSimulator {
         } else {
             System.out.println(p1.getName() + " attacked " + p2.getName() + " and did 0 damage!");
         }
+    }
+
+    // Getters
+    public CharacterList getList() {
+        return list;
     }
 }

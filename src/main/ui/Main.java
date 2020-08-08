@@ -1,15 +1,35 @@
 package ui;
 
+import ui.gui.*;
+
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
+
     private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("LabelDemo");
+        JFrame frame = new JFrame("BattleSimulator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel cardPanel = new JPanel();
+        CardLayout cardLayout = new CardLayout();
+        BattleSimulator battleSim = new BattleSimulator();
 
-        //Add content to the window.
-        frame.add(new BattleSimulatorGUI());
+        cardPanel.setLayout(cardLayout);
+
+        TemplateGUI menu = new MenuGUI(cardPanel, cardLayout, battleSim);
+        TemplateGUI create = new CreateGUI(cardPanel, cardLayout, battleSim);
+        TemplateGUI manage = new ManageGUI(cardPanel, cardLayout, battleSim);
+        TemplateGUI battle = new BattleGUI(cardPanel, cardLayout, battleSim);
+
+        cardPanel.add(menu, "Menu");
+        cardPanel.add(create, "Create");
+        cardPanel.add(manage, "Manage");
+        cardPanel.add(battle, "Battle");
+
+        frame.add(cardPanel);
+
+        cardLayout.show(cardPanel, "Menu");
 
         //Display the window.
         frame.pack();
@@ -21,9 +41,6 @@ public class Main {
         //creating and showing this application's GUI.
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                //Turn off metal's use of bold fonts
-                UIManager.put("swing.boldMetal", Boolean.FALSE);
-
                 createAndShowGUI();
             }
         });
