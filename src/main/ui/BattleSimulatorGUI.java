@@ -142,7 +142,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         JPanel hpMenu = new JPanel();
         addToPanel(hpMenu, "HP");
         setBoxLayout(hpMenu);
-        confirmStatSet = new JLabel("Character's name is " + character.getName() + ".");
+        confirmStatSet = new JLabel("Character's name is " + character.getName());
 
         intro = new JLabel("Please enter the character's HP value. Stat pool: " + character.getStatPool());
         hpMenu.add(confirmStatSet);
@@ -170,7 +170,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         JPanel atkMenu = new JPanel();
         addToPanel(atkMenu, "ATK");
         setBoxLayout(atkMenu);
-        confirmStatSet = new JLabel("Character's HP is now " + character.getHP() + ".");
+        confirmStatSet = new JLabel("Character's HP is now " + character.getHP());
         intro = new JLabel("Please enter the character's ATK value. Stat pool: " + character.getStatPool());
         atkMenu.add(confirmStatSet);
         atkMenu.add(intro);
@@ -196,7 +196,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         addToPanel(defMenu, "DEF");
         setBoxLayout(defMenu);
 
-        confirmStatSet = new JLabel("Character's ATK is now " + character.getATK() + ".");
+        confirmStatSet = new JLabel("Character's ATK is now " + character.getATK());
         intro = new JLabel("Please enter the character's DEF value. Stat pool: " + character.getStatPool());
         defMenu.add(confirmStatSet);
         defMenu.add(intro);
@@ -222,7 +222,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         addToPanel(quoteMenu, "Quote");
         setBoxLayout(quoteMenu);
 
-        confirmStatSet = new JLabel("Character's DEF is now " + character.getDEF() + ".");
+        confirmStatSet = new JLabel("Character's DEF is now " + character.getDEF());
         intro = new JLabel("Please enter the character's battle quote.");
 
         l = new JLabel("");
