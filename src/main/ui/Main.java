@@ -1,37 +1,40 @@
 package ui;
 
-import ui.gui.*;
+import model.CharacterList;
+import persistence.Reader;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
+    private static final String LIST_FILE = "./data/characterList.txt";
 
-    private static void createAndShowGUI() {
+    private static void setUp() {
+        CharacterList list;
+        try {
+            list = Reader.readList(new File(LIST_FILE));
+        } catch (IOException e) {
+            list = new CharacterList();
+        }
+
         //Create and set up the window.
         JFrame frame = new JFrame("BattleSimulator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel cardPanel = new JPanel();
         CardLayout cardLayout = new CardLayout();
-        BattleSimulator battleSim = new BattleSimulator();
 
         cardPanel.setLayout(cardLayout);
 
-        TemplateGUI menu = new MenuGUI(cardPanel, cardLayout, battleSim);
-        TemplateGUI create = new CreateGUI(cardPanel, cardLayout, battleSim);
-        TemplateGUI manage = new ManageGUI(cardPanel, cardLayout, battleSim);
-        TemplateGUI battle = new BattleGUI(cardPanel, cardLayout, battleSim);
+        JPanel menu = new BattleSimulatorGUI(cardPanel, cardLayout, list);
 
         cardPanel.add(menu, "Menu");
-        cardPanel.add(create, "Create");
-        cardPanel.add(manage, "Manage");
-        cardPanel.add(battle, "Battle");
 
         frame.add(cardPanel);
 
         cardLayout.show(cardPanel, "Menu");
 
-        //Display the window.
         frame.pack();
         frame.setVisible(true);
     }
@@ -41,7 +44,7 @@ public class Main {
         //creating and showing this application's GUI.
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                createAndShowGUI();
+                setUp();
             }
         });
     }
