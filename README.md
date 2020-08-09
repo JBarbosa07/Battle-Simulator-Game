@@ -38,3 +38,15 @@ https://www.java67.com/2016/10/3-ways-to-convert-string-to-json-object-in-java.h
 * As a user, I want to be able to select one of my characters from the list and have them challenge the boss
 * As a user, I want to be able to save my characters/list of characters to file
 * As a user, I want to be able to reload my list of characters whenever I return to the game
+
+## Instructions for Grader
+* You can generate the first required event by pressing the "Create a new character" button and following the resulting
+instructions on the next screen(s). By the time the process is finished, a character should now be added to the character list.
+* You can generate the second required event by pressing the "Manage characters" button and pressing the "View a character"
+button on the next page. You will then be given instructions to type the name of the character you wish to examine from the list.
+Follow the instructions correctly and a new page should open showing the stats of the selected character in the list. Similarly, you can
+also remove a character from the list by pressing the "Delete a character" buttom from the manage menu and following the instructions provided
+* You can trigger my audio component by pressing the "Save your data" button on the first menu.
+* You can save the state of my application by pressing the "Save your data" button. The save will be confirmed by the sound effect
+* You can reload the state of my application by simply closing and reopening the app. If you'd already pressed the save button before
+closing the app, then the characters in the list should still be available to view from "Manage characters" after it is reopened

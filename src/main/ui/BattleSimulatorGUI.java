@@ -15,6 +15,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
 
 // NOTE: I referenced the Java swing demo files for the implementation of my GUI
 
@@ -31,7 +34,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
     static JLabel l;
     private Character character;
     private Character playerOne;
-    private static GridLayout gridLayout = new GridLayout(0,1);
+    private static GridLayout gridLayout = new GridLayout(0, 1);
 
     // EFFECTS: runs the application
     public BattleSimulatorGUI(JPanel cardPanel, CardLayout cardLayout, CharacterList list) {
@@ -261,7 +264,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
 
     private void initializeManage() {
         JPanel manageMenu = new JPanel();
-        GridLayout gridLayout = new GridLayout(0,1);
+        GridLayout gridLayout = new GridLayout(0, 1);
         manageMenu.setLayout(gridLayout);
         addToPanel(manageMenu, "Manage");
         JLabel title = new JLabel("Manage Your Characters", SwingConstants.CENTER);
@@ -390,7 +393,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
 
     private void initializeBattle() {
         JPanel battleMenu = new JPanel();
-        GridLayout gridLayout = new GridLayout(0,1);
+        GridLayout gridLayout = new GridLayout(0, 1);
         battleMenu.setLayout(gridLayout);
         addToPanel(battleMenu, "Battle");
         JLabel title = new JLabel("Battle", SwingConstants.CENTER);
@@ -675,6 +678,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         }
         if (e.getActionCommand().equals("save")) {
             saveList();
+            playSound("completed-ding-3.wav");
         }
         if (e.getActionCommand().equals("quit")) {
             System.exit(0);
@@ -687,12 +691,24 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
             Writer writer = new Writer(new File(LIST_FILE));
             writer.write(list);
             writer.close();
-            System.out.println("Characters have been saved to " + LIST_FILE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to save characters to " + LIST_FILE);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             // this is due to a programming error
+        }
+    }
+
+    // Code for playSound referenced from http://suavesnippets.blogspot.com/2011/06/add-sound-on-jbutton-click-in-java.html
+    public void playSound(String soundName) {
+        try {
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+        } catch (Exception ex) {
+            System.out.println("Error with playing sound.");
+            ex.printStackTrace();
         }
     }
 }

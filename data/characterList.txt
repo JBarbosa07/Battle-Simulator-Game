@@ -1,1 +1,1 @@
-{"list":[{"statPool":983,"name":"Bro","hp":5,"atk":6,"def":6,"quote":"y"},{"statPool":983,"name":"eh","hp":5,"atk":6,"def":6,"quote":"y"}]}
+{"list":[]}
