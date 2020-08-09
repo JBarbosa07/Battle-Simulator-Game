@@ -16,7 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
 
-// NOTE: I referenced the TellerApp for the implementation of the Scanner code and file saving function in the ui
+// NOTE: I referenced the Java swing demo files for the implementation of my GUI
 
 // The RPG battle simulator application
 public class BattleSimulatorGUI extends JPanel implements ActionListener {
@@ -308,10 +308,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         goBack.setActionCommand("returnManage");
         goBack.addActionListener(this);
 
-        viewMenu.add(t);
-        viewMenu.add(b);
-        viewMenu.add(goBack);
-        viewMenu.add(l);
+        addButtons(viewMenu, goBack);
 
         characters.setAlignmentX(CENTER_ALIGNMENT);
         intro.setAlignmentX(CENTER_ALIGNMENT);
@@ -319,6 +316,13 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         b.setAlignmentX(CENTER_ALIGNMENT);
         t.setAlignmentX(CENTER_ALIGNMENT);
         goBack.setAlignmentX(CENTER_ALIGNMENT);
+    }
+
+    private void addButtons(JPanel viewMenu, JButton goBack) {
+        viewMenu.add(t);
+        viewMenu.add(b);
+        viewMenu.add(goBack);
+        viewMenu.add(l);
     }
 
     private void viewCharacterSuccess(Character character) {
@@ -357,10 +361,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         goBack.setActionCommand("returnManage");
         goBack.addActionListener(this);
 
-        deleteMenu.add(t);
-        deleteMenu.add(b);
-        deleteMenu.add(goBack);
-        deleteMenu.add(l);
+        addButtons(deleteMenu, goBack);
 
         characters.setAlignmentX(CENTER_ALIGNMENT);
         intro.setAlignmentX(CENTER_ALIGNMENT);
@@ -435,10 +436,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         goBack.setActionCommand("returnBattle");
         goBack.addActionListener(this);
 
-        pvpMenu.add(t);
-        pvpMenu.add(b);
-        pvpMenu.add(goBack);
-        pvpMenu.add(l);
+        addButtons(pvpMenu, goBack);
 
         characters.setAlignmentX(CENTER_ALIGNMENT);
         intro.setAlignmentX(CENTER_ALIGNMENT);
@@ -468,10 +466,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         goBack.setActionCommand("returnBattle");
         goBack.addActionListener(this);
 
-        pvp2Menu.add(t);
-        pvp2Menu.add(b);
-        pvp2Menu.add(goBack);
-        pvp2Menu.add(l);
+        addButtons(pvp2Menu, goBack);
 
         characters.setAlignmentX(CENTER_ALIGNMENT);
         intro.setAlignmentX(CENTER_ALIGNMENT);
@@ -501,10 +496,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         goBack.setActionCommand("returnBattle");
         goBack.addActionListener(this);
 
-        pvbMenu.add(t);
-        pvbMenu.add(b);
-        pvbMenu.add(goBack);
-        pvbMenu.add(l);
+        addButtons(pvbMenu, goBack);
 
         characters.setAlignmentX(CENTER_ALIGNMENT);
         intro.setAlignmentX(CENTER_ALIGNMENT);
@@ -522,103 +514,29 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String s = e.getActionCommand();
-        if (e.getActionCommand().equals("create")) {
-            initializeCreate();
-        }
-        if (e.getActionCommand().equals("manage")) {
-            initializeManage();
-        }
-        if (e.getActionCommand().equals("battle")) {
-            initializeBattle();
-        }
-        if (e.getActionCommand().equals("save")) {
-            saveList();
-        }
-        if (e.getActionCommand().equals("quit")) {
-            System.exit(0);
-        }
-        if (s.equals("Let's start!")) {
-            setName();
-        }
-        if (s.equals("Submit Name")) {
-            String inputString = t.getText();
-            if (inputString.equals("")) {
-                l.setText("Please enter at least one character");
-            } else {
-                character.setName(inputString);
-                setHP();
-            }
-        }
-        if (s.equals("Submit HP")) {
-            try {
-                int i = Integer.parseInt(t.getText());
-                character.setHP(i);
-                setATK();
-            } catch (NumberFormatException nfe) {
-                l.setText("Please enter an integer value");
-            } catch (InvalidInputException invalidInputException) {
-                l.setText("HP cannot be zero");
-            } catch (StatLargerThanPoolException statLargerThanPoolException) {
-                l.setText("Inputted value exceeds the stat pool.");
-            }
-        }
-        if (s.equals(("Submit ATK"))) {
-            try {
-                int i = Integer.parseInt((t.getText()));
-                character.setATK(i);
-                setDEF();
-            } catch (NumberFormatException nfe) {
-                l.setText("Please enter an integer value");
-            } catch (StatLargerThanPoolException statLargerThanPoolException) {
-                l.setText("Inputted value exceeds the stat pool.");
-            }
-        }
-        if (s.equals(("Submit DEF"))) {
-            try {
-                int i = Integer.parseInt((t.getText()));
-                character.setDEF(i);
-                setQuote();
-            } catch (NumberFormatException nfe) {
-                l.setText("Please enter an integer value");
-            } catch (StatLargerThanPoolException statLargerThanPoolException) {
-                l.setText("Inputted value exceeds the stat pool.");
-            }
-        }
-        if (s.equals("Submit Quote")) {
-            String inputString = t.getText();
-            if (inputString.equals("")) {
-                l.setText("Please enter at least one character");
-            } else {
-                character.setQuote(inputString);
-                list.addCharacter(character);
-                finishCharacter();
-            }
-        }
+        menuCommands(e);
+        createCommands(s);
+        manageCommands(e);
+        battleCommands(e);
+        returnCommands(e, s);
+    }
+
+    private void returnCommands(ActionEvent e, String s) {
         if (s.equals("Return to main menu")) {
             cardLayout.show(cardPanel, "Menu");
         }
-        if (e.getActionCommand().equals("view")) {
-            viewCharacter();
+        if (e.getActionCommand().equals("return")) {
+            cardLayout.show(cardPanel, "Menu");
         }
-        if (e.getActionCommand().equals("delete")) {
-            deleteCharacter();
+        if (e.getActionCommand().equals("returnManage")) {
+            cardLayout.show(cardPanel, "Manage");
         }
-        if (e.getActionCommand().equals("View character")) {
-            try {
-                Character c = list.getCharacter(t.getText());
-                viewCharacterSuccess(c);
-            } catch (CharacterDoesntExistException characterDoesntExistException) {
-                l.setText("That character does not exist");
-            }
+        if (e.getActionCommand().equals("returnBattle")) {
+            cardLayout.show(cardPanel, "Battle");
         }
-        if (e.getActionCommand().equals("Delete character")) {
-            try {
-                Character c = list.getCharacter(t.getText());
-                deleteCharacterSuccess(c);
-            } catch (CharacterDoesntExistException characterDoesntExistException) {
-                l.setText("That character does not exist");
-            }
-        }
+    }
+
+    private void battleCommands(ActionEvent e) {
         if (e.getActionCommand().equals("pvp")) {
             characterVsCharacterSelectFighterOne();
         }
@@ -642,14 +560,124 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
                 l.setText("That character does not exist");
             }
         }
-        if (e.getActionCommand().equals("return")) {
-            cardLayout.show(cardPanel, "Menu");
+    }
+
+    private void manageCommands(ActionEvent e) {
+        if (e.getActionCommand().equals("view")) {
+            viewCharacter();
         }
-        if (e.getActionCommand().equals("returnManage")) {
-            cardLayout.show(cardPanel, "Manage");
+        if (e.getActionCommand().equals("delete")) {
+            deleteCharacter();
         }
-        if (e.getActionCommand().equals("returnBattle")) {
-            cardLayout.show(cardPanel, "Battle");
+        if (e.getActionCommand().equals("View character")) {
+            try {
+                Character c = list.getCharacter(t.getText());
+                viewCharacterSuccess(c);
+            } catch (CharacterDoesntExistException characterDoesntExistException) {
+                l.setText("That character does not exist");
+            }
+        }
+        if (e.getActionCommand().equals("Delete character")) {
+            try {
+                Character c = list.getCharacter(t.getText());
+                deleteCharacterSuccess(c);
+            } catch (CharacterDoesntExistException characterDoesntExistException) {
+                l.setText("That character does not exist");
+            }
+        }
+    }
+
+    private void createCommands(String s) {
+        if (s.equals("Let's start!")) {
+            setName();
+        }
+        checkNameButton(s);
+        checkHPButton(s);
+        checkAtkButton(s);
+        checkDefButton(s);
+        if (s.equals("Submit Quote")) {
+            String inputString = t.getText();
+            if (inputString.equals("")) {
+                l.setText("Please enter at least one character");
+            } else {
+                character.setQuote(inputString);
+                list.addCharacter(character);
+                finishCharacter();
+            }
+        }
+    }
+
+    private void checkDefButton(String s) {
+        if (s.equals(("Submit DEF"))) {
+            try {
+                int i = Integer.parseInt((t.getText()));
+                character.setDEF(i);
+                setQuote();
+            } catch (NumberFormatException nfe) {
+                l.setText("Please enter an integer value");
+            } catch (StatLargerThanPoolException statLargerThanPoolException) {
+                l.setText("Inputted value exceeds the stat pool.");
+            }
+        }
+    }
+
+    private void checkAtkButton(String s) {
+        if (s.equals(("Submit ATK"))) {
+            try {
+                int i = Integer.parseInt((t.getText()));
+                character.setATK(i);
+                setDEF();
+            } catch (NumberFormatException nfe) {
+                l.setText("Please enter an integer value");
+            } catch (StatLargerThanPoolException statLargerThanPoolException) {
+                l.setText("Inputted value exceeds the stat pool.");
+            }
+        }
+    }
+
+    private void checkHPButton(String s) {
+        if (s.equals("Submit HP")) {
+            try {
+                int i = Integer.parseInt(t.getText());
+                character.setHP(i);
+                setATK();
+            } catch (NumberFormatException nfe) {
+                l.setText("Please enter an integer value");
+            } catch (InvalidInputException invalidInputException) {
+                l.setText("HP cannot be zero");
+            } catch (StatLargerThanPoolException statLargerThanPoolException) {
+                l.setText("Inputted value exceeds the stat pool.");
+            }
+        }
+    }
+
+    private void checkNameButton(String s) {
+        if (s.equals("Submit Name")) {
+            String inputString = t.getText();
+            if (inputString.equals("")) {
+                l.setText("Please enter at least one character");
+            } else {
+                character.setName(inputString);
+                setHP();
+            }
+        }
+    }
+
+    private void menuCommands(ActionEvent e) {
+        if (e.getActionCommand().equals("create")) {
+            initializeCreate();
+        }
+        if (e.getActionCommand().equals("manage")) {
+            initializeManage();
+        }
+        if (e.getActionCommand().equals("battle")) {
+            initializeBattle();
+        }
+        if (e.getActionCommand().equals("save")) {
+            saveList();
+        }
+        if (e.getActionCommand().equals("quit")) {
+            System.exit(0);
         }
     }
 
