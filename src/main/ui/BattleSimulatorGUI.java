@@ -101,6 +101,11 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         start.addActionListener(this);
         start.setAlignmentX(CENTER_ALIGNMENT);
         createMenu.add(start);
+        JButton goBack = new JButton("Return to previous menu");
+        goBack.setActionCommand("return");
+        goBack.addActionListener(this);
+        createMenu.add(goBack);
+        goBack.setAlignmentX(CENTER_ALIGNMENT);
     }
 
     private void setName() {
