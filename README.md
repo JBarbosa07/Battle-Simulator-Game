@@ -43,7 +43,7 @@ https://www.java67.com/2016/10/3-ways-to-convert-string-to-json-object-in-java.h
 * You can generate the first required event by pressing the "Create a new character" button and following the resulting
 instructions on the next screen(s). By the time the process is finished, a character should now be added to the character list.
 * You can generate the second required event by pressing the "Manage characters" button and pressing the "View a character"
-button on the next page. You will then see the character list and be given instructions to type the name of the character you wish to examine from the list.
+button on the next page. You will see the character list and be given instructions to type the name of the character you wish to examine from the list.
 Follow the instructions correctly and a new page should open showing the stats of the selected character in the list. Similarly, you can
 also remove a character from the list by pressing the "Delete a character" button from the manage menu and following the instructions provided
 * You can trigger my audio component by pressing the "Save your data" button on the first menu.

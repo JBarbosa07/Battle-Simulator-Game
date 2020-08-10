@@ -24,8 +24,8 @@ import javax.sound.sampled.AudioSystem;
 // The RPG battle simulator application
 public class BattleSimulatorGUI extends JPanel implements ActionListener {
     private static final String LIST_FILE = "./data/characterList.txt";
-    private JPanel cardPanel;
-    private CardLayout cardLayout;
+    private final JPanel cardPanel;
+    private final CardLayout cardLayout;
     private CharacterList list;
     static JLabel intro;
     static JLabel confirmStatSet;
@@ -274,6 +274,9 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
         JLabel intro = new JLabel("What would you like to do?", SwingConstants.CENTER);
         manageMenu.add(intro);
 
+        JLabel characters = new JLabel(list.printCharacters(), SwingConstants.CENTER);
+        manageMenu.add(characters);
+
         JButton view = new JButton("View a character");
         view.setActionCommand("view");
         view.addActionListener(this);
@@ -375,10 +378,11 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
     }
 
     private void deleteCharacterSuccess(Character character) throws CharacterDoesntExistException {
+        list.removeCharacter(character);
         JPanel deleteSuccessMenu = new JPanel();
         addToPanel(deleteSuccessMenu, "View Success");
         setBoxLayout(deleteSuccessMenu);
-        list.removeCharacter(character);
+
         intro = new JLabel(character.getName() + " was successfully deleted!");
         JButton goBack = new JButton("Return to previous menu");
         deleteSuccessMenu.add(intro);
@@ -532,7 +536,7 @@ public class BattleSimulatorGUI extends JPanel implements ActionListener {
             cardLayout.show(cardPanel, "Menu");
         }
         if (e.getActionCommand().equals("returnManage")) {
-            cardLayout.show(cardPanel, "Manage");
+            initializeManage();
         }
         if (e.getActionCommand().equals("returnBattle")) {
             cardLayout.show(cardPanel, "Battle");
