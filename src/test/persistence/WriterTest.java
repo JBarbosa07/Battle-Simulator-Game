@@ -40,8 +40,8 @@ public class WriterTest {
 
         try {
             CharacterList expectedList = Reader.readList(new File(TEST_FILE));
-            assertTrue(expectedList.isContained(p1));
-            assertTrue(expectedList.isContained(p2));
+            assertTrue(expectedList.contains(p1));
+            assertTrue(expectedList.contains(p2));
             assertEquals(2, expectedList.getSize());
         } catch (IOException e) {
             fail("unexpected call to exception");

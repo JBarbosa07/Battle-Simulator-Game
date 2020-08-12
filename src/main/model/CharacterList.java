@@ -72,7 +72,7 @@ public class CharacterList implements Saveable {
         return list.size();
     }
 
-    public boolean isContained(Character c) {
+    public boolean contains(Character c) {
         return list.contains(c);
     }
 

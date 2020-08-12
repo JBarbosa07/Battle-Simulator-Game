@@ -2,7 +2,6 @@ package persistence;
 
 import model.Character;
 import model.CharacterList;
-import persistence.Reader;
 import model.exceptions.CharacterDoesntExistException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,8 +38,8 @@ public class ReaderTest {
             Character p1Copy = list.getCharacter("Guy");
             Character p2Copy = list.getCharacter("Dude");
 
-            assertTrue(list.isContained(p1));
-            assertTrue(list.isContained(p2));
+            assertTrue(list.contains(p1));
+            assertTrue(list.contains(p2));
 
             assertEquals("Guy", p1Copy.getName());
             assertEquals(500, p1Copy.getHP());
@@ -67,8 +66,8 @@ public class ReaderTest {
             Character p3Copy = list.getCharacter("Mynthra");
             Character p4Copy = list.getCharacter("Weak");
 
-            assertTrue(list.isContained(p3));
-            assertTrue(list.isContained(p4));
+            assertTrue(list.contains(p3));
+            assertTrue(list.contains(p4));
 
             assertEquals("Mynthra", p3Copy.getName());
             assertEquals(300, p3Copy.getHP());

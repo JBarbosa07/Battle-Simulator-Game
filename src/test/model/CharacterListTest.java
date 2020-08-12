@@ -7,9 +7,7 @@ import persistence.Reader;
 import persistence.Writer;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,7 +34,7 @@ public class CharacterListTest {
     @Test
     public void testAddCharacter() {
         list.addCharacter(character);
-        assertTrue(list.isContained(character));
+        assertTrue(list.contains(character));
         assertEquals(1, list.getSize());
     }
 
@@ -44,29 +42,29 @@ public class CharacterListTest {
     public void testAddTwoCharacters() {
         list.addCharacter(character);
         list.addCharacter(otherCharacter);
-        assertTrue(list.isContained(character));
-        assertTrue(list.isContained(otherCharacter));
+        assertTrue(list.contains(character));
+        assertTrue(list.contains(otherCharacter));
         assertEquals(2, list.getSize());
     }
 
     @Test
     public void testRemoveCharacter() {
         list.addCharacter(character);
-        assertTrue(list.isContained(character));
+        assertTrue(list.contains(character));
         assertEquals(1, list.getSize());
         try {
             list.removeCharacter(character);
         } catch (CharacterDoesntExistException e) {
             fail("Unexpected exception call");
         }
-        assertFalse(list.isContained(character));
+        assertFalse(list.contains(character));
         assertEquals(0, list.getSize());
     }
 
     @Test
     public void testRemoveCharacterDoesntExist() {
         list.addCharacter(character);
-        assertTrue(list.isContained(character));
+        assertTrue(list.contains(character));
         assertEquals(1, list.getSize());
         try {
             list.removeCharacter(otherCharacter);
@@ -74,7 +72,7 @@ public class CharacterListTest {
         } catch (CharacterDoesntExistException e) {
             // expected
         }
-        assertTrue(list.isContained(character));
+        assertTrue(list.contains(character));
         assertEquals(1, list.getSize());
     }
 
@@ -82,8 +80,8 @@ public class CharacterListTest {
     public void testRemoveTwoCharacters() {
         list.addCharacter(character);
         list.addCharacter(otherCharacter);
-        assertTrue(list.isContained(character));
-        assertTrue(list.isContained(otherCharacter));
+        assertTrue(list.contains(character));
+        assertTrue(list.contains(otherCharacter));
         assertEquals(2, list.getSize());
         try {
             list.removeCharacter(character);
@@ -91,8 +89,8 @@ public class CharacterListTest {
         } catch (CharacterDoesntExistException e) {
             fail("Unexpected exception call");
         }
-        assertFalse(list.isContained(character));
-        assertFalse(list.isContained(otherCharacter));
+        assertFalse(list.contains(character));
+        assertFalse(list.contains(otherCharacter));
         assertEquals(0, list.getSize());
     }
 
@@ -166,7 +164,7 @@ public class CharacterListTest {
         testWriter.write(list);
         testWriter.close();
         CharacterList expectedList = Reader.readList(new File(TEST_FILE));
-        assertTrue(expectedList.isContained(character));
-        assertTrue(expectedList.isContained(otherCharacter));
+        assertTrue(expectedList.contains(character));
+        assertTrue(expectedList.contains(otherCharacter));
     }
 }

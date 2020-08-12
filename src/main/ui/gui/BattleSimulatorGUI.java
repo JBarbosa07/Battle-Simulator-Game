@@ -1,4 +1,4 @@
-package ui;
+package ui.gui;
 
 import model.Character;
 import model.CharacterList;

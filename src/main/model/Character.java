@@ -26,33 +26,33 @@ public class Character extends Combatant {
         if (hp < 1) {
             throw new InvalidInputException();
         }
-        if (hp > statPool) {
-            throw new StatLargerThanPoolException();
-        }
+        checkWithinStatPool(hp);
         this.hp = hp;
-        statPool = statPool - hp;
+        statPool -= hp;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the ATK stat of the character and subtracts the same amount from the stat pool; if atk > stat pool,
     // throws StatLargerThanPoolException
     public void setATK(int atk) throws StatLargerThanPoolException {
-        if (atk > statPool) {
-            throw new StatLargerThanPoolException();
-        }
+        checkWithinStatPool(atk);
         this.atk = atk;
-        statPool = statPool - atk;
+        statPool -= atk;
     }
 
     // MODIFIES: this
     // EFFECTS: sets the DEF stat of the character and subtracts the same amount from the stat pool; if def > stat pool,
     // throws StatLargerThanPoolException
     public void setDEF(int def) throws StatLargerThanPoolException {
-        if (def > statPool) {
+        checkWithinStatPool(def);
+        this.def = def;
+        statPool -= def;
+    }
+
+    private void checkWithinStatPool(int stat) throws StatLargerThanPoolException {
+        if (stat > statPool) {
             throw new StatLargerThanPoolException();
         }
-        this.def = def;
-        statPool = statPool - def;
     }
 
     // MODIFIES: this

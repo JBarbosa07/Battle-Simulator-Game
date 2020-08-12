@@ -51,3 +51,14 @@ also remove a character from the list by pressing the "Delete a character" butto
 * You can reload the state of my application by simply closing and reopening the app. If you'd already pressed the save button before
 closing the app, then the characters in the list should still be available to view from "Manage characters" -> "View a character"
 after it is reopened
+
+## Phase 4: Task 2
+I have implemented the Character class to be robust, specifically making the int-based "SetX" (where X is a stat) methods
+robust by throwing an exception if the inputted value is more than the allotted points allowed in the stat pool. The SetHP
+method also has an additional exception that is thrown if the hp is set to 0. Each one of these methods have a test in CharacterTest
+checking for situations where the exception is called and not called correctly.
+
+## Phase 4: Task 3
+Issues found in code:
+* Duplication found in methods in BattleSimulator and Character when checking if given/inputted values meet the critiera/
+need to throw exception
