@@ -19,7 +19,7 @@ public class CharacterManager extends SubMenu {
     public void viewCharacter() throws CharacterDoesntExistException {
         System.out.println("\nPlease enter the name of the character you would like to view.");
         String name = input.next();
-        retrieveCharacter(name);
+        getCharacter(name);
         System.out.println("\n" + character.printCharacter());
     }
 
@@ -31,7 +31,7 @@ public class CharacterManager extends SubMenu {
         String name = input.next();
 
         try {
-            retrieveCharacter(name);
+            getCharacter(name);
             removeCharacter(character);
             System.out.println("\n" + name + " was successfully deleted.");
         } catch (CharacterDoesntExistException e) {
@@ -39,7 +39,7 @@ public class CharacterManager extends SubMenu {
         }
     }
 
-    private void retrieveCharacter(String name) throws CharacterDoesntExistException {
+    private void getCharacter(String name) throws CharacterDoesntExistException {
         character = list.getCharacter(name);
     }
 }
