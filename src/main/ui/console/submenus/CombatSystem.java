@@ -80,6 +80,7 @@ public class CombatSystem extends SubMenu {
             p2.attackedBy(p1);
             damageMessage(p1, p2, damage1);
             System.out.println("\n" + p2.getName() + " has " + p2.getHP() + " HP remaining!");
+
             if (!p2.isDead()) {
                 System.out.println("\n" + p2.getName() + ": " + p2.getQuote());
                 p1.attackedBy(p2);

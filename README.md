@@ -62,3 +62,8 @@ checking for situations where the exception is called and not called correctly.
 Issues found in code:
 * Duplication found in methods in BattleSimulator and Character when checking if given/inputted values meet the critiera/
 need to throw exception
+* Duplication found in the BattleSimulator where three methods that allow the user to look through and select menu options
+have essentionally matching code (using a while to keep the program running and then go through a list of scanner input commands)
+* Very poor cohesion in BattleSimulator; is essentially running the tasks of menu management, character creation, character management.
+and the actual battle simulation all at once
+* Code involved in combat simulation is very messy and unclear to understand at a glance, could be cleaned up a bit

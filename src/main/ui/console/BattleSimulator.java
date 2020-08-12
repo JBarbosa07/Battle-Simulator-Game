@@ -64,11 +64,11 @@ public class BattleSimulator {
                 processCommand(command, menuKey);
             }
         }
-        System.out.println("Thanks for playing!");
+        System.out.println("\nThanks for playing!");
         System.exit(0);
     }
 
-    // EFFECTS: instantiates sub menus and establishes bidirectional relationships
+    // EFFECTS: instantiates sub menus and establishes bidirectional relationships with BattleSimulator
     private void setUpSubMenusAndBidirectionalRelationships() {
         subMenus = new ArrayList<>();
 
@@ -94,6 +94,33 @@ public class BattleSimulator {
         } else if ("battle".equals(menuKey)) {
             displayBattleMenu();
         }
+    }
+
+    // EFFECTS: displays main menu options to player
+    private void displayMainMenu() {
+        System.out.println("\nWelcome to the Battle Simulator! Please choose an option below.");
+        System.out.println("\tc -> create new character");
+        System.out.println("\tm -> manage characters");
+        System.out.println("\tb -> battle");
+        System.out.println("\ts -> save your data");
+        System.out.println("\tq -> quit");
+    }
+
+    // EFFECTS: displays character manager options to player
+    private void displayManagerMenu() {
+        System.out.println("\n" + list.printCharacters());
+        System.out.println("\nWhat would you like to do?");
+        System.out.println("\tv -> view a character");
+        System.out.println("\td -> delete a character");
+        System.out.println("\tr -> return to previous menu");
+    }
+
+    // EFFECTS: displays character manager options to player
+    private void displayBattleMenu() {
+        System.out.println("\nWhat would you like to do?");
+        System.out.println("\tpvp -> have two characters fight each other");
+        System.out.println("\tpvb -> have a character fight a boss");
+        System.out.println("\tr -> return to previous menu");
     }
 
     // EFFECTS: handles the player's input based on key
@@ -194,33 +221,6 @@ public class BattleSimulator {
         } catch (CharacterDoesntExistException e) {
             System.err.println("That character does not exist");
         }
-    }
-
-    // EFFECTS: displays main menu options to player
-    private void displayMainMenu() {
-        System.out.println("\nWelcome to the Battle Simulator! Please choose an option below.");
-        System.out.println("\tc -> create new character");
-        System.out.println("\tm -> manage characters");
-        System.out.println("\tb -> battle");
-        System.out.println("\ts -> save your data");
-        System.out.println("\tq -> quit");
-    }
-
-    // EFFECTS: displays character manager options to player
-    private void displayManagerMenu() {
-        System.out.println("\n" + list.printCharacters());
-        System.out.println("\nWhat would you like to do?");
-        System.out.println("\tv -> view a character");
-        System.out.println("\td -> delete a character");
-        System.out.println("\tr -> return to previous menu");
-    }
-
-    // EFFECTS: displays character manager options to player
-    private void displayBattleMenu() {
-        System.out.println("\nWhat would you like to do?");
-        System.out.println("\tpvp -> have two characters fight each other");
-        System.out.println("\tpvb -> have a character fight a boss");
-        System.out.println("\tr -> return to previous menu");
     }
 
     // MODIFIES: this
