@@ -30,7 +30,7 @@ public class CombatSystem extends SubMenu {
         Character p2 = list.getCharacter(name2);
         System.out.println("\n" + name2 + " was chosen to be fighter 2");
 
-        checkStalemateThenFight(p1, p2);
+        startBattle(p1, p2);
     }
 
     // EFFECTS: prompts player to select a character to fight a boss until one dies
@@ -42,12 +42,11 @@ public class CombatSystem extends SubMenu {
         Character c = list.getCharacter(name);
         System.out.println("\n" + name + " was chosen to fight " + boss.getName());
 
-        checkStalemateThenFight(c, boss);
+        startBattle(c, boss);
     }
 
-    // EFFECTS: checks if battle would lead to a stalemate and potentially throws StalemateException, otherwise proceed
-    // with combat simulation
-    private void checkStalemateThenFight(Combatant p1, Combatant p2) {
+    // EFFECTS: starts the combat simulation and potentially catches a StalemateException
+    private void startBattle(Combatant p1, Combatant p2) {
         try {
             combatSimulation(p1, p2);
         } catch (StalemateException e) {

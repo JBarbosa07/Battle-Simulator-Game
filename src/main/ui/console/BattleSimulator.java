@@ -38,17 +38,18 @@ public class BattleSimulator {
         menuControl(menuKey);
     }
 
-    // REQUIRES: menuKey is one of menu, manage, or battle
+    // REQUIRES: menuKey is one of start, menu, manage, or battle
     // MODIFIES: this
-    // EFFECTS: processes the player's input and brings up the appropriate screen/action
+    // EFFECTS: processes the player's input and brings up the appropriate screen/action. Instantiates the character
+    // list and submenus when menuKey is "start"
     private void menuControl(String menuKey) {
         boolean keepGoing = true;
         String command;
         input = new Scanner(System.in);
 
         if (menuKey.equals("start")) {
-            loadAccounts();
-            setUpSubMenusAndBidirectionalRelationships();
+            loadList();
+            setUpSubMenus();
             menuKey = "menu";
         }
 
@@ -69,7 +70,7 @@ public class BattleSimulator {
     }
 
     // EFFECTS: instantiates sub menus and establishes bidirectional relationships with BattleSimulator
-    private void setUpSubMenusAndBidirectionalRelationships() {
+    private void setUpSubMenus() {
         subMenus = new ArrayList<>();
 
         creator = new CharacterCreator(list, input);
@@ -226,7 +227,7 @@ public class BattleSimulator {
     // MODIFIES: this
     // EFFECTS: loads character list from LIST_FILE, if that file exists;
     // otherwise initializes empty list
-    private void loadAccounts() {
+    private void loadList() {
         try {
             list = Reader.readList(new File(LIST_FILE));
         } catch (IOException e) {

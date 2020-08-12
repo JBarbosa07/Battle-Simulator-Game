@@ -39,6 +39,7 @@ https://www.java67.com/2016/10/3-ways-to-convert-string-to-json-object-in-java.h
 * As a user, I want to be able to save my characters/list of characters to file
 * As a user, I want to be able to reload my list of characters whenever I return to the game
 
+
 ## Instructions for Grader
 * You can generate the first required event by pressing the "Create a new character" button and following the resulting
 instructions on the next screen(s). By the time the process is finished, a character should now be added to the character list.
@@ -52,18 +53,26 @@ also remove a character from the list by pressing the "Delete a character" butto
 closing the app, then the characters in the list should still be available to view from "Manage characters" -> "View a character"
 after it is reopened
 
+
 ## Phase 4: Task 2
 I have implemented the Character class to be robust, specifically making the int-based "SetX" (where X is a stat) methods
 robust by throwing an exception if the inputted value is more than the allotted points allowed in the stat pool. The SetHP
 method also has an additional exception that is thrown if the hp is set to 0. Each one of these methods have a test in CharacterTest
 checking for situations where the exception is called and not called correctly.
 
+
 ## Phase 4: Task 3
 Issues found in code:
 * Duplication found in methods in BattleSimulator and Character when checking if given/inputted values meet the critiera/
 need to throw exception
 * Duplication found in the BattleSimulator where three methods that allow the user to look through and select menu options
-have essentionally matching code (using a while to keep the program running and then go through a list of scanner input commands)
-* Very poor cohesion in BattleSimulator; is essentially running the tasks of menu management, character creation, character management.
+have essentionally matching code (using a while loop to keep the program running and then go through a list of scanner input commands)
+* Very poor cohesion in BattleSimulator; is essentially running the tasks of menu management, character creation, character management,
 and the actual battle simulation all at once
 * Code involved in combat simulation is very messy and unclear to understand at a glance, could be cleaned up a bit
+* Display menu methods titled as 1, 2, 3 and their purpose seems unclear at a glance
+* A large amount of duplication in GUI, many buttons/JLabels have the same name and have nearly the exact same purpose all
+throughout the methods
+* Inconsistency in the EventHandler where actionPerformed checks for matching strings associated with buttons rather than a
+designated ActionEvent key
+* Inconsistency found in Main- cluttered with GUI set up while the console version only has one line of code instantiatingg a new BattleSimulator
