@@ -84,8 +84,9 @@ could be used in place of the duplicate code
 corresponding menu (e.g. if the key is "manage" then the method displays the manage menu)
 * Created three sub menus for BattleSimulator: CharacterCreator, CharacterManager, and CombatSystem, which each handle a
 different area of the BattleSimulator. A bidirectional relationship was established between the BattleSimulator and each
-sub menu so that they each keep track of the same character list. Was not able to do the same for the GUI, but the process
-would be most likely similar
+sub menu so that they each keep track of the same character list. 
+* Refractored the GUI similarly so that the GUI was divided into multiple "Menu" classes that each displayed/handled a different part
+of the game (e.g. MainMenu, CreateMenu, ManageMenu, etc.)
 * Fixed inconsistency with the actionPerformed/EventHandler method(s) and made them all accept ActionEvent keys
 * Display method names were made more specific (e.g. displayMainMenu, displayManageMenu, etc)
 * Further methods were extracted from code in CombatSystem to make their purpose more clear (e.g. the code that handled the
@@ -96,5 +97,7 @@ a BattleSimulatorGUI class which instantiated a MainMenuGUI class (where the res
 
 **Notes for UML design diagram:**
 * I chose to make a diagram representing the console ui instead of the gui, because I feel it
-better represents the idea behind the project and how the game operates
+better represents the idea behind the project and how the game operates. However, the two uis were designed very similarly, so
+classes in the UML diagram can roughly be replaced with a gui equivalent to represent the gui (e.g. BattleSimulator = MainMenu GUI,
+CharacterCreator = CreateMenuGUI)
 * If an association arrow head does not have a number accompanying it then it can assumed that it represents 1
