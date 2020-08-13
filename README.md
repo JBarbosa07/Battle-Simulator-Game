@@ -82,6 +82,8 @@ designated ActionEvent key
 could be used in place of the duplicate code
 * The similar menu methods were combined into a single menu managing method, that based on a given string key will give a
 corresponding menu (e.g. if the key is "manage" then the method displays the manage menu)
+* Main was cleaned up to only instantiate a new BattleSimulator and a new BattleSimulator GUI- the GUI set up was put into 
+a BattleSimulatorGUI class which instantiated a MainMenuGUI class (where the rest of the GUI code is handled)
 * Created three sub menus for BattleSimulator: CharacterCreator, CharacterManager, and CombatSystem, which each handle a
 different area of the BattleSimulator. A bidirectional relationship was established between the BattleSimulator and each
 sub menu so that they each keep track of the same character list. 
@@ -91,8 +93,6 @@ of the game (e.g. MainMenu, CreateMenu, ManageMenu, etc.)
 * Display method names were made more specific (e.g. displayMainMenu, displayManageMenu, etc)
 * Further methods were extracted from code in CombatSystem to make their purpose more clear (e.g. the code that handled the
 actual fight in a method was refractored into a method named "inCombat")
-* Main was cleaned up to only instantiate a new BattleSimulator and a new BattleSimulator GUI- the GUI set up was put into 
-a BattleSimulatorGUI class which instantiated a MainMenuGUI class (where the rest of the GUI code is handled)
 
 
 **Notes for UML design diagram:**
