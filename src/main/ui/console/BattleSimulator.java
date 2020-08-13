@@ -33,6 +33,7 @@ public class BattleSimulator {
     private CombatSystem combatSystem;
     private Writer writer;
     private Reader reader;
+    private Boolean keepGoing;
 
     // EFFECTS: runs the application
     public BattleSimulator() {
@@ -45,7 +46,7 @@ public class BattleSimulator {
     // EFFECTS: processes the player's input and brings up the appropriate screen/action. Instantiates the character
     // list and submenus when menuKey is "start"
     private void menuControl(String menuKey) {
-        boolean keepGoing = true;
+        keepGoing = true;
         String command;
         input = new Scanner(System.in);
 
@@ -61,11 +62,7 @@ public class BattleSimulator {
             command = input.next();
             command = command.toLowerCase();
 
-            if ("q".equals(command)) {
-                keepGoing = false;
-            } else {
-                processCommand(command, menuKey);
-            }
+            processCommand(command, menuKey);
         }
         System.out.println("\nThanks for playing!");
         System.exit(0);
@@ -147,6 +144,8 @@ public class BattleSimulator {
             menuControl("battle");
         } else if ("s".equals(command)) {
             saveList();
+        } else if ("q".equals(command)) {
+            keepGoing = false;
         } else {
             System.err.println("Selection not valid");
         }

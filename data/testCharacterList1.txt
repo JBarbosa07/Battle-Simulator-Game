@@ -1,1 +1,1 @@
-{"list":[{"statPool":1000,"name":"Player1","hp":0,"atk":0,"def":0,"quote":"Blarg"},{"statPool":1000,"name":"Player2","hp":0,"atk":0,"def":0,"quote":"Haha"}]}
+{"list":{"Player2":{"statPool":1000,"name":"Player2","hp":0,"atk":0,"def":0,"quote":"Haha"},"Player1":{"statPool":1000,"name":"Player1","hp":0,"atk":0,"def":0,"quote":"Blarg"}}}

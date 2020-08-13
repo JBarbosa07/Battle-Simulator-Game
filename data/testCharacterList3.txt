@@ -1,1 +1,1 @@
-{"list":[{"statPool":0,"name":"Mynthra","hp":300,"atk":450,"def":250,"quote":"How annoying"},{"statPool":999,"name":"Weak","hp":1,"atk":0,"def":0,"quote":"I suck"}]}
+{"list":{"Mynthra":{"statPool":0,"name":"Mynthra","hp":300,"atk":450,"def":250,"quote":"How annoying"},"Weak":{"statPool":999,"name":"Weak","hp":1,"atk":0,"def":0,"quote":"I suck"}}}
