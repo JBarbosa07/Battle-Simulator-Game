@@ -63,6 +63,7 @@ checking for situations where the exception is called and not called correctly.
 
 ## Phase 4: Task 3
 **Issues found in code:**
+
 * Duplication found in methods in BattleSimulator and Character when checking if given/inputted values meet the critiera/
 need to throw exception
 * Duplication found in the BattleSimulator where three methods that allow the user to look through and select menu options
@@ -78,17 +79,26 @@ throughout the methods
 designated ActionEvent key
 * Inconsistency found in Main- cluttered with GUI set up while the console version only has one line of code instantiatingg a new BattleSimulator
 
+
 **Solutions:**
+
 * Removed as much duplication of code as I could find, by extracting the matching code to create helper methods, which
 could be used in place of the duplicate code
 * The similar menu methods were combined into a single menu managing method, that based on a given string key will give a
 corresponding menu (e.g. if the key is "manage" then the method displays the manage menu)
 * Created three sub menus for BattleSimulator: CharacterCreator, CharacterManager, and CombatSystem, which each handle a
 different area of the BattleSimulator. A bidirectional relationship was established between the BattleSimulator and each
-sub menu so that they each keep track of the same character list.
+sub menu so that they each keep track of the same character list. Was not able to do the same for the GUI, but the process
+would be most likely similar
 * Fixed inconsistency with the actionPerformed/EventHandler method(s) and made them all accept ActionEvent keys
 * Display method names were made more specific (e.g. displayMainMenu, displayManageMenu, etc)
 * Further methods were extracted from code in CombatSystem to make their purpose more clear (e.g. the code that handled the
 actual fight in a method was refractored into a method named "inCombat")
 * Main was cleaned up to only instantiate a new BattleSimulator and a new BattleSimulator GUI- the GUI set up was put into 
 a BattleSimulatorGUI class which instantiated a MainMenuGUI class (where the rest of the GUI code is handled)
+
+
+**Notes for UML design diagram:**
+* I chose to make a diagram representing the console ui instead of the gui, because I feel it
+better represents the idea behind the project and how the game operates
+* If an association arrow head does not have a number accompanying it then it can assumed that it represents 1

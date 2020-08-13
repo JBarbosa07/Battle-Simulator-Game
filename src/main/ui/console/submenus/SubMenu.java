@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 // Represents a submenu branch of the main BattleSimulator
 public abstract class SubMenu {
+    protected Character character;
     protected CharacterList list;
     protected Scanner input;
     protected BattleSimulator battleSim;

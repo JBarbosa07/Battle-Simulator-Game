@@ -11,7 +11,6 @@ import java.util.Scanner;
 
 // Represents the BattleSimulator's character creator
 public class CharacterCreator extends SubMenu {
-    private Character character;
 
     public CharacterCreator(CharacterList list, Scanner input) {
         super(list, input);

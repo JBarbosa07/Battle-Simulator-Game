@@ -1,6 +1,5 @@
 package ui.console.submenus;
 
-import model.Character;
 import model.CharacterList;
 import model.exceptions.CharacterDoesntExistException;
 
@@ -8,7 +7,6 @@ import java.util.Scanner;
 
 // Represents the BattleSimulator's character manager
 public class CharacterManager extends SubMenu {
-    private Character character;
 
     public CharacterManager(CharacterList list, Scanner input) {
         super(list, input);

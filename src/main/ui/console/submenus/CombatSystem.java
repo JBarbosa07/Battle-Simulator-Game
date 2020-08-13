@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 // Represents the BattleSimulator's combat system
 public class CombatSystem extends SubMenu {
+    private Boss boss;
 
     public CombatSystem(CharacterList list, Scanner input) {
         super(list, input);
@@ -35,7 +36,7 @@ public class CombatSystem extends SubMenu {
 
     // EFFECTS: prompts player to select a character to fight a boss until one dies
     public void characterVsBoss() throws CharacterDoesntExistException {
-        Boss boss = new Boss();
+        boss = new Boss();
         System.out.println("\n" + list.printCharacters());
         System.out.println("\nPlease select your fighter");
         String name = input.next();

@@ -31,6 +31,8 @@ public class BattleSimulator {
     private CharacterCreator creator;
     private CharacterManager manager;
     private CombatSystem combatSystem;
+    private Writer writer;
+    private Reader reader;
 
     // EFFECTS: runs the application
     public BattleSimulator() {
@@ -229,7 +231,8 @@ public class BattleSimulator {
     // otherwise initializes empty list
     private void loadList() {
         try {
-            list = Reader.readList(new File(LIST_FILE));
+            reader = new Reader();
+            list = reader.readList(new File(LIST_FILE));
         } catch (IOException e) {
             list = new CharacterList();
         }
@@ -238,7 +241,7 @@ public class BattleSimulator {
     // EFFECTS: saves character list to LIST_FILE
     private void saveList() {
         try {
-            Writer writer = new Writer(new File(LIST_FILE));
+            writer = new Writer(new File(LIST_FILE));
             writer.write(list);
             writer.close();
             System.out.println("\nCharacters have been saved to " + LIST_FILE);
