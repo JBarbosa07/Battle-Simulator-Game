@@ -182,6 +182,7 @@ public class MainMenuGUI extends JPanel implements ActionListener {
     }
 
     private void finishCharacter() {
+        list.addCharacter(character);
 
         JPanel finishMenu = new JPanel();
         addToPanel(finishMenu, "Finish");
@@ -439,7 +440,6 @@ public class MainMenuGUI extends JPanel implements ActionListener {
                 errorLabel.setText("Please enter at least one character");
             } else {
                 character.setQuote(inputString);
-                list.addCharacter(character);
                 finishCharacter();
             }
         }

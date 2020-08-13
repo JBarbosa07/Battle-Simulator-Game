@@ -25,10 +25,6 @@ defeat the preset boss).
 I myself enjoy playing games and entertain the idea of designing my own games, so I chose this
 project in order to practice skills such as character creation and designing a combat system from scratch on Java.
 
-NOTE: I referenced the TellerApp for the implementation of the Scanner code and file saving function in the ui. I 
-also utilized Gson for the implementation of code, using the following link as a reference:
-https://www.java67.com/2016/10/3-ways-to-convert-string-to-json-object-in-java.html.
-
 
 ## User Stories
 * As a user, I want to be able to create my own character(s) with stats and attributes and add it to a list of characters
