@@ -9,6 +9,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
+// NOTE: I referenced the Java swing demo files for the implementation of my GUI
+
 public class BattleSimulatorGUI {
     private static final String LIST_FILE = "./data/characterList.txt";
     private CharacterList list;
