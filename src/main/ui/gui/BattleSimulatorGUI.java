@@ -2,7 +2,7 @@ package ui.gui;
 
 import model.CharacterList;
 import persistence.Reader;
-import ui.gui.submenus.MainMenuGUI;
+import ui.gui.submenus.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +11,7 @@ import java.io.IOException;
 
 // NOTE: I referenced the Java swing demo files for the implementation of my GUI
 
+// The GUI version of the RPG battle simulator application
 public class BattleSimulatorGUI {
     private static final String LIST_FILE = "./data/characterList.txt";
     private CharacterList list;
@@ -30,7 +31,7 @@ public class BattleSimulatorGUI {
 
         cardPanel.setLayout(cardLayout);
 
-        JPanel menu = new MainMenuGUI(cardPanel, cardLayout, list);
+        MenuGUI menu = new MainMenuGUI(cardPanel, cardLayout, list);
 
         cardPanel.add(menu, "Menu");
 
