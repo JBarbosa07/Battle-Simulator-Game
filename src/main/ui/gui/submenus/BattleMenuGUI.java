@@ -1,6 +1,7 @@
 package ui.gui.submenus;
 
 import model.Boss;
+import model.Character;
 import model.CharacterList;
 import model.Combatant;
 import model.exceptions.CharacterDoesntExistException;
@@ -13,11 +14,11 @@ import java.awt.event.ActionEvent;
 // NOTE: I referenced the Java swing demo files for the implementation of my GUI
 
 public class BattleMenuGUI extends MenuGUI {
-    private Combatant playerOne;
-    private Combatant playerTwo;
+    private Combatant fighter1;
+    private Combatant fighter2;
     private int damage1;
     private int damage2;
-    private boolean isPlayerOneTurn;
+    private boolean isPlayer1Turn;
 
     public BattleMenuGUI(JPanel cardPanel, CardLayout cardLayout, CharacterList list) {
         super(cardPanel, cardLayout, list);
@@ -102,7 +103,7 @@ public class BattleMenuGUI extends MenuGUI {
     }
 
     private void combatSimulation(Combatant p1, Combatant p2) throws StalemateException {
-        isPlayerOneTurn = false;
+        isPlayer1Turn = false;
 
         damage1 = p1.getATK() - p2.getDEF();
         damage2 = p2.getATK() - p1.getDEF();
@@ -111,7 +112,7 @@ public class BattleMenuGUI extends MenuGUI {
             throw new StalemateException();
         }
 
-        JPanel firstCombat =  new JPanel();
+        JPanel firstCombat = new JPanel();
         addToPanel(firstCombat, "firstCombat");
         setBoxLayout(firstCombat);
 
@@ -131,12 +132,12 @@ public class BattleMenuGUI extends MenuGUI {
     }
 
     private void keepFighting(Combatant p1, Combatant p2) {
-        JPanel combatPanel =  new JPanel();
+        JPanel combatPanel = new JPanel();
         addToPanel(combatPanel, "combatPanel");
         setBoxLayout(combatPanel);
 
-        if (isPlayerOneTurn) {
-            isPlayerOneTurn = false;
+        if (isPlayer1Turn) {
+            isPlayer1Turn = false;
 
             instantiateBattleQuote(p1, combatPanel);
 
@@ -147,7 +148,7 @@ public class BattleMenuGUI extends MenuGUI {
             instantiateHealthRemaining(p2, combatPanel);
 
         } else {
-            isPlayerOneTurn = true;
+            isPlayer1Turn = true;
 
             instantiateBattleQuote(p2, combatPanel);
 
@@ -176,15 +177,23 @@ public class BattleMenuGUI extends MenuGUI {
     }
 
     private void battleResult(Combatant p1, Combatant p2) {
+
         JPanel resultPanel = new JPanel();
         addToPanel(resultPanel, "result");
         setBoxLayout(resultPanel);
 
         if (p1.isDead()) {
             instantiateResultMessage(p1, p2, resultPanel, " can no longer fight!  ");
-        } else {
+        } else if (p2.isDead()) {
             instantiateResultMessage(p2, p1, resultPanel, " can no longer fight! ");
         }
+
+        resetHP((Character) p1);
+
+        if (p2.getClass() != Boss.class) {
+            resetHP((Character) p2);
+        }
+
         instantiateGoBack(resultPanel, "returnBattle");
     }
 
@@ -234,8 +243,8 @@ public class BattleMenuGUI extends MenuGUI {
     // Helpers
     private void setPlayerOneAndSelectNext() {
         try {
-            playerOne = list.getCharacter(textField.getText());
-            characterVsCharacterSelectFighterTwo(playerOne);
+            fighter1 = list.getCharacter(textField.getText());
+            characterVsCharacterSelectFighterTwo(fighter1);
         } catch (CharacterDoesntExistException characterDoesntExistException) {
             errorLabel.setText("That character does not exist");
         }
@@ -243,8 +252,8 @@ public class BattleMenuGUI extends MenuGUI {
 
     private void setPlayerTwoAndStartBattle() {
         try {
-            playerTwo = list.getCharacter(textField.getText());
-            combatSimulation(playerOne, playerTwo);
+            fighter2 = list.getCharacter(textField.getText());
+            combatSimulation(fighter1, fighter2);
         } catch (CharacterDoesntExistException characterDoesntExistException) {
             errorLabel.setText("That character does not exist");
         } catch (StalemateException e) {
@@ -254,9 +263,9 @@ public class BattleMenuGUI extends MenuGUI {
 
     private void setPlayerOneAndStartBossBattle() {
         try {
-            playerOne = list.getCharacter(textField.getText());
-            playerTwo = new Boss();
-            combatSimulation(playerOne, playerTwo);
+            fighter1 = list.getCharacter(textField.getText());
+            fighter2 = new Boss();
+            combatSimulation(fighter1, fighter2);
         } catch (CharacterDoesntExistException characterDoesntExistException) {
             errorLabel.setText("That character does not exist");
         } catch (StalemateException stalemateException) {
@@ -265,10 +274,10 @@ public class BattleMenuGUI extends MenuGUI {
     }
 
     private void continueBattleOrEnd() {
-        if (playerOne.isDead() || playerTwo.isDead()) {
-            battleResult(playerOne, playerTwo);
+        if (fighter1.isDead() || fighter2.isDead()) {
+            battleResult(fighter1, fighter2);
         } else {
-            keepFighting(playerOne, playerTwo);
+            keepFighting(fighter1, fighter2);
         }
     }
 
@@ -300,5 +309,9 @@ public class BattleMenuGUI extends MenuGUI {
         result = new JLabel(p1.getName() + s + p2.getName() + " wins!");
         resultPanel.add(result);
         result.setAlignmentX(CENTER_ALIGNMENT);
+    }
+
+    private void resetHP(Character c) {
+        c.resetHP();
     }
 }

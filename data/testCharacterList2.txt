@@ -1,1 +1,1 @@
-{"list":{"Guy":{"statPool":0,"name":"Guy","hp":500,"atk":500,"def":0,"quote":"Bruh"},"Dude":{"statPool":0,"name":"Dude","hp":400,"atk":300,"def":300,"quote":"En garde!"}}}
+{"list":{"Guy":{"statPool":0,"fullHP":500,"name":"Guy","hp":500,"atk":500,"def":0,"quote":"Bruh"},"Dude":{"statPool":0,"fullHP":400,"name":"Dude","hp":400,"atk":300,"def":300,"quote":"En garde!"}}}

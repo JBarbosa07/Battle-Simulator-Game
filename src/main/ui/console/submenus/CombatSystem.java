@@ -32,6 +32,8 @@ public class CombatSystem extends SubMenu {
         System.out.println("\n" + name2 + " was chosen to be fighter 2");
 
         startBattle(p1, p2);
+        p1.resetHP();
+        p2.resetHP();
     }
 
     // EFFECTS: prompts player to select a character to fight a boss until one dies
@@ -44,6 +46,7 @@ public class CombatSystem extends SubMenu {
         System.out.println("\n" + name + " was chosen to fight " + boss.getName());
 
         startBattle(c, boss);
+        c.resetHP();
     }
 
     // EFFECTS: starts the combat simulation and potentially catches a StalemateException
@@ -92,6 +95,7 @@ public class CombatSystem extends SubMenu {
 
     // EFFECTS: If p1 is dead, print out that p2 wins. If p2 is dead, print out that p1 wins
     private void battleResult(Combatant p1, Combatant p2) {
+
         if (p1.isDead()) {
             System.out.println("\n" + p1.getName() + " can no longer fight!  " + p2.getName() + " wins!");
         } else {

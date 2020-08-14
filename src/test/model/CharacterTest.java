@@ -215,4 +215,19 @@ class CharacterTest {
         assertFalse(character.equals(boss));
     }
 
+    @Test
+    public void testResetHP() throws StatLargerThanPoolException, InvalidInputException {
+        character.setHP(50);
+        assertEquals(50, character.getFullHP());
+        character.setDEF(30);
+
+        otherCharacter.setATK(40);
+
+        character.attackedBy(otherCharacter);
+        assertEquals(50 - (40 - 30),character.getHP());
+
+        character.resetHP();
+        assertEquals(50, character.getHP());
+    }
+
 }

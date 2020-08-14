@@ -6,6 +6,7 @@ import model.exceptions.StatLargerThanPoolException;
 // Represents a character created by the player
 public class Character extends Combatant {
     private int statPool;
+    private int fullHP;
 
     // Constructs a character with an initial stat pool of 1000
     public Character() {
@@ -28,6 +29,7 @@ public class Character extends Combatant {
         }
         checkWithinStatPool(hp);
         this.hp = hp;
+        this.fullHP = hp;
         statPool -= hp;
     }
 
@@ -66,8 +68,19 @@ public class Character extends Combatant {
         return name + " - " + "HP: " + hp + ", ATK: " + atk + ", DEF: " + def + ", Quote: " + quote;
     }
 
+    // REQUIRES: fullHP is the same as the value that Character's hp was originally set too
+    // MODIFIES: this
+    // EFFECTS: resets the character's hp to full
+    public void resetHP() {
+        this.hp = fullHP;
+    }
+
     // getters
     public int getStatPool() {
         return statPool;
+    }
+
+    public int getFullHP() {
+        return fullHP;
     }
 }

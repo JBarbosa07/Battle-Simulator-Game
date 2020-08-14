@@ -42,6 +42,7 @@ public class ReaderTest {
             assertTrue(list.contains(p2));
 
             assertEquals("Guy", p1Copy.getName());
+            assertEquals(500, p1Copy.getFullHP());
             assertEquals(500, p1Copy.getHP());
             assertEquals(500, p1Copy.getATK());
             assertEquals(0, p1Copy.getDEF());
@@ -49,6 +50,7 @@ public class ReaderTest {
             assertEquals(0, p1Copy.getStatPool());
 
             assertEquals("Dude", p2Copy.getName());
+            assertEquals(400, p2Copy.getFullHP());
             assertEquals(400, p2Copy.getHP());
             assertEquals(300, p2Copy.getATK());
             assertEquals(300, p2Copy.getDEF());
@@ -70,6 +72,7 @@ public class ReaderTest {
             assertTrue(list.contains(p4));
 
             assertEquals("Mynthra", p3Copy.getName());
+            assertEquals(300, p3Copy.getFullHP());
             assertEquals(300, p3Copy.getHP());
             assertEquals(450, p3Copy.getATK());
             assertEquals(250, p3Copy.getDEF());
@@ -77,6 +80,7 @@ public class ReaderTest {
             assertEquals(0, p3Copy.getStatPool());
 
             assertEquals("Weak", p4Copy.getName());
+            assertEquals(1, p4Copy.getFullHP());
             assertEquals(1, p4Copy.getHP());
             assertEquals(0, p4Copy.getATK());
             assertEquals(0, p4Copy.getDEF());
