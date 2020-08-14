@@ -1,16 +1,14 @@
 package ui.gui.submenus;
 
-import com.sun.tools.javac.util.List;
+
 import model.Character;
 import model.CharacterList;
 import model.exceptions.CharacterDoesntExistException;
-import ui.console.submenus.SubMenu;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 // NOTE: I referenced the Java swing demo files for the implementation of my GUI
