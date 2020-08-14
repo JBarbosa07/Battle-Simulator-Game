@@ -1,0 +1,1 @@
+{"list":{"Player 1":{"statPool":0,"name":"Player 1","hp":400,"atk":300,"def":300,"quote":"Oof"},"Player 2":{"statPool":0,"name":"Player 2","hp":500,"atk":400,"def":100,"quote":"Uhhh"},"Oof":{"statPool":998,"name":"Oof","hp":1,"atk":1,"def":0,"quote":"0"},"Haha":{"statPool":999,"name":"Haha","hp":1,"atk":0,"def":0,"quote":"Eyah"}}}

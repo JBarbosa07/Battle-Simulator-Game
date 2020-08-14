@@ -63,12 +63,14 @@ public class BattleMenuGUI extends MenuGUI {
         instantiateErrorLabel(pvpMenu);
     }
 
-    private void characterVsCharacterSelectFighterTwo() {
+    private void characterVsCharacterSelectFighterTwo(Combatant p1) {
         JPanel pvp2Menu = new JPanel();
         addToPanel(pvp2Menu, "PvP2");
         setBoxLayout(pvp2Menu);
 
         instantiatePrintCharacters(pvp2Menu);
+
+        instantiateIntro(pvp2Menu, p1.getName() + " was selected to be fighter 1");
 
         instantiateIntro(pvp2Menu, "Please select fighter 2");
 
@@ -233,7 +235,7 @@ public class BattleMenuGUI extends MenuGUI {
     private void setPlayerOneAndSelectNext() {
         try {
             playerOne = list.getCharacter(textField.getText());
-            characterVsCharacterSelectFighterTwo();
+            characterVsCharacterSelectFighterTwo(playerOne);
         } catch (CharacterDoesntExistException characterDoesntExistException) {
             errorLabel.setText("That character does not exist");
         }
@@ -280,6 +282,7 @@ public class BattleMenuGUI extends MenuGUI {
     private void instantiateContinueButton(JPanel panel) {
         JButton continueButton;
         continueButton = new JButton("Next turn");
+        continueButton.addActionListener(this);
         continueButton.setActionCommand("next");
         panel.add(continueButton);
         continueButton.setAlignmentX(CENTER_ALIGNMENT);
