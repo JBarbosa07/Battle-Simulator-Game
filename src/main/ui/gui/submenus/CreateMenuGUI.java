@@ -4,6 +4,7 @@ import model.Character;
 import model.CharacterList;
 import model.exceptions.InvalidInputException;
 import model.exceptions.StatLargerThanPoolException;
+import ui.exceptions.CharacterAlreadyExistsException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -201,6 +202,8 @@ public class CreateMenuGUI extends MenuGUI {
             String inputString = textField.getText();
             if (inputString.equals("")) {
                 errorLabel.setText("Please enter at least one character");
+            } else if (list.isNameTaken(inputString)) {
+                errorLabel.setText("That character already exists");
             } else {
                 character.setName(inputString);
                 setHP();

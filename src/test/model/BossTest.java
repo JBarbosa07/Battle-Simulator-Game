@@ -16,10 +16,10 @@ public class BossTest {
 
     @Test
     public void testBoss() {
-        assertEquals("DESTROYER", boss.getName());
+        assertEquals("Big Boss", boss.getName());
         assertEquals(500, boss.getHP());
-        assertEquals(350, boss.getATK());
+        assertEquals(400, boss.getATK());
         assertEquals(200, boss.getDEF());
-        assertEquals("DIE, SCUM", boss.getQuote());
+        assertEquals("Die, scum!", boss.getQuote());
     }
 }
