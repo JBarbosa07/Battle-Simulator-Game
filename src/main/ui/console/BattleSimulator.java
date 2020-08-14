@@ -59,7 +59,7 @@ public class BattleSimulator {
         while (keepGoing) {
             generateDisplay(menuKey);
 
-            command = input.next();
+            command = getInputString();
             command = command.toLowerCase();
 
             processCommand(command, menuKey);
@@ -278,5 +278,10 @@ public class BattleSimulator {
                 s.removeCharacter(c);
             }
         }
+    }
+
+    public String getInputString() {
+        input.useDelimiter("\n");
+        return input.next();
     }
 }

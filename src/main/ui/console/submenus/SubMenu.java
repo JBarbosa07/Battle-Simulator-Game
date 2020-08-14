@@ -27,6 +27,11 @@ public abstract class SubMenu {
         return list;
     }
 
+    public String getInputString() {
+        input.useDelimiter("\n");
+        return input.next();
+    }
+
     // MODIFIES: this, battleSim
     // EFFECTS: if character list doesn't contain c, add c to list and battleSim's character list
     public void addCharacter(Character c) {

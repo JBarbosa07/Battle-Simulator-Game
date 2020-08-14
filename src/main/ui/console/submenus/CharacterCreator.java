@@ -35,8 +35,8 @@ public class CharacterCreator extends SubMenu {
     // CharacterAlreadyExistsException
     private void enterName(Character c) throws CharacterAlreadyExistsException {
         System.out.println("\nLet's create a new character!");
-        System.out.println("Please enter the character's name (no spaces allowed)");
-        String name = input.next();
+        System.out.println("Please enter the character's name");
+        String name = getInputString();
 
         if (list.isNameTaken(name)) {
             throw new CharacterAlreadyExistsException();
@@ -87,8 +87,7 @@ public class CharacterCreator extends SubMenu {
     // EFFECTS: prompts the player to set quote
     private void enterQuote(Character c) {
         System.out.println("\nPlease enter the character's battle quote.");
-        input.nextLine();
-        String quote = input.nextLine();
+        String quote = getInputString();
         c.setQuote(quote);
         System.out.println("\nCharacter's quote is now " + c.getQuote());
     }
@@ -98,5 +97,4 @@ public class CharacterCreator extends SubMenu {
             throw new InputtedNonIntException();
         }
     }
-
 }

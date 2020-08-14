@@ -16,7 +16,8 @@ public class CharacterManager extends SubMenu {
     // EFFECTS: retrieves character with inputted name and prints their stats
     public void viewCharacter() throws CharacterDoesntExistException {
         System.out.println("\nPlease enter the name of the character you would like to view.");
-        String name = input.next();
+        String name = getInputString();
+
         getCharacter(name);
         System.out.println("\n" + character.printCharacter());
     }
@@ -26,7 +27,7 @@ public class CharacterManager extends SubMenu {
     public void deleteCharacter() {
         System.out.println(list.printCharacters());
         System.out.println("\nPlease enter the name of the character you would like to delete.");
-        String name = input.next();
+        String name = getInputString();
 
         try {
             getCharacter(name);

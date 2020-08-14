@@ -22,12 +22,12 @@ public class CombatSystem extends SubMenu {
         System.out.println("\n" + list.printCharacters());
 
         System.out.println("\nPlease select fighter 1");
-        String name1 = input.next();
+        String name1 = getInputString();
         Character p1 = list.getCharacter(name1);
         System.out.println("\n" + name1 + " was chosen to be fighter 1");
 
         System.out.println("Please select fighter 2");
-        String name2 = input.next();
+        String name2 = getInputString();
         Character p2 = list.getCharacter(name2);
         System.out.println("\n" + name2 + " was chosen to be fighter 2");
 
@@ -39,7 +39,7 @@ public class CombatSystem extends SubMenu {
         boss = new Boss();
         System.out.println("\n" + list.printCharacters());
         System.out.println("\nPlease select your fighter");
-        String name = input.next();
+        String name = getInputString();
         Character c = list.getCharacter(name);
         System.out.println("\n" + name + " was chosen to fight " + boss.getName());
 

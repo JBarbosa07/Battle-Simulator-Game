@@ -6,6 +6,7 @@ import persistence.Saveable;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 // Represents a list of characters created by the player
@@ -14,7 +15,7 @@ public class CharacterList implements Saveable {
 
     // EFFECTS: constructs an empty character list
     public CharacterList() {
-        list = new HashMap<>();
+        list = new LinkedHashMap<>();
     }
 
     // REQUIRES: duplicate characters cannot be added
