@@ -38,7 +38,7 @@ public class BattleMenuGUI extends MenuGUI {
         pvp.addActionListener(this);
         battleMenu.add(pvp);
 
-        JButton pvb = new JButton("Have a character fight a boss");
+        JButton pvb = new JButton("Have a character fight the boss");
         pvb.setActionCommand("pvb");
         pvb.addActionListener(this);
         battleMenu.add(pvb);
@@ -91,7 +91,7 @@ public class BattleMenuGUI extends MenuGUI {
 
         instantiatePrintCharacters(pvbMenu);
 
-        instantiateIntro(pvbMenu, "Please select fighter 1.");
+        instantiateIntro(pvbMenu, "Please select your fighter.");
 
         instantiateTextField(pvbMenu);
 

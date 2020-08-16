@@ -97,10 +97,20 @@ public class MainMenuGUI extends MenuGUI {
         if (e.getActionCommand().equals("save")) {
             saveList();
             playSound("completed-ding-3.wav");
+            saveConfirm();
         }
         if (e.getActionCommand().equals("quit")) {
             System.exit(0);
         }
+    }
+
+    private void saveConfirm() {
+        JPanel saveConfirm = new JPanel();
+        addToPanel(saveConfirm, "save");
+        setBoxLayout(saveConfirm);
+
+        instantiateIntro(saveConfirm, "Character data has been saved to" + LIST_FILE);
+        instantiateGoBack(saveConfirm, "return");
     }
 
     // EFFECTS: saves character list to LIST_FILE
