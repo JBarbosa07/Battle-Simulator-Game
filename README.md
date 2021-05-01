@@ -1,4 +1,4 @@
-# Battle Simulator Game
+# Battle Simulator Game (Repository cloned from private university account)
 
 ## Project Summary
 
